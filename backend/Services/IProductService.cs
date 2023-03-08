@@ -1,6 +1,6 @@
 namespace NetCoreDemo.Services;
 
-public interface IProductServices
+public interface IProductService
 {
 
 }

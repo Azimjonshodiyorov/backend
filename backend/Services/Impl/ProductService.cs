@@ -1,6 +1,9 @@
 namespace NetCoreDemo.Services;
 
-public class ProductServices : IProductServices
+using NetCoreDemo.Models;
+using NetCoreDemo.DTOs;
+
+public class ProductService : CrudService<Product, ProductDTO>
 {
 
 }
