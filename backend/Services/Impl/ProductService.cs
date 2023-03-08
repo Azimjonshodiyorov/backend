@@ -1,6 +1,6 @@
 namespace NetCoreDemo.Services;
 
-public class ProductServices : IProductServices
+public class ProductServices 
 {
-    
+
 }
