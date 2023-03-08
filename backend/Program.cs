@@ -3,16 +3,16 @@ using NetCoreDemo.Services;
 using System.Text.Json.Serialization;
 using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
-using Microsoft.EntityFrameworkCore;
+using NetCoreDemo.Db;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.ConfigureKestrel(options =>
         {
-            options.ListenLocalhost(5000);
+            options.ListenLocalhost(7655);
 
-            options.ListenLocalhost(5001, listenOptions =>
+            options.ListenLocalhost(7656, listenOptions =>
             {
                 listenOptions.UseHttps();
             });
@@ -20,7 +20,10 @@ builder.WebHost.ConfigureKestrel(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers();
+
+builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -34,6 +37,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+    }
 }
 
 app.UseHttpsRedirection();

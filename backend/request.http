@@ -1,8 +1,18 @@
-POST https://localhost:5001/products HTTP/1.1
-content-type : application/json" 
+# POST https://localhost:7656/products HTTP/1.1
+# content-type : application/json"
 
-{
-    "name": "Shoe", "price" : "100", "description" : "Nike Shoe - New Arrival"
-}
+# {
+#     "name": "Shoe", "price" : 100, "description" : "Nike Shoe - New Arrival"
+# }
 
-# GET https://localhost:5001/products
+# GET https://localhost:7656/products
+
+DELETE https://localhost:7656/products/2
+
+# PUT https://localhost:7656/products/2 HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "name": "Mens Boots", "price" : 100, "description" : "Nike Shoe - New Arrival"
+# }
+

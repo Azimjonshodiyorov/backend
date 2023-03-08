@@ -89,6 +89,7 @@ frontend/package-*.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/request.http
 *.code-workspace
 
 # Local History for Visual Studio Code
