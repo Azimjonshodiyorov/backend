@@ -10,7 +10,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     where TDto : BaseDTO<TModel>
 
 {
-     protected readonly ICrudService<TModel, TDto> _service;
+    protected readonly ICrudService<TModel, TDto> _service;
 
     public CrudController(ICrudService<TModel, TDto> service)
     {
@@ -29,7 +29,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
         return Ok(item);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<TModel?>> Get(int id)
     {
         var item = await _service.GetAsync(id);
@@ -62,9 +62,9 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     }
 
     [HttpGet]
-    public async Task<ICollection<TModel>> GetAll()
+    public virtual async Task<ICollection<TModel>> GetAll()
     {
-        return await _service.GetAllAsync();
+        return await _service.GetAllAsync(null);
     }
 }
 

@@ -10,6 +10,8 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
     where TDto : BaseDTO<TModel>
 {
     protected readonly AppDbContext _dbContext;
+    protected readonly ProductService _productService;
+
     public CrudService(AppDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -26,7 +28,7 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
 
     public async Task<TModel?> GetAsync(int id)
     {
-        return await _dbContext.Set<TModel>().FindAsync(id);
+        return await _dbContext.Set<TModel>().AsNoTracking().FindAsync(id);
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -41,10 +43,10 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         return true;
     }
 
-    public async Task<ICollection<TModel>> GetAllAsync()
+    public virtual async Task<ICollection<TModel>> GetAllAsync(ICrudFilter? filter)
     {
         return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
-    }
+    }    
 
     public async Task<TModel?> UpdateAsync(int id, TDto request)
     {

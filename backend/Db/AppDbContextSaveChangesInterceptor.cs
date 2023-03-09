@@ -10,9 +10,8 @@ public class AppDbContextSaveChangesInterceptor : SaveChangesInterceptor
     public void UpdateTimeStamps(DbContextEventData eventData)
     {
         var entries = eventData.Context!.ChangeTracker
-            .Entries() //get back al the entries 
-            .Where(e => e.Entity is BaseModel && (e.State == EntityState.Added) || (e.State == EntityState.Modified)); //filter above entries by entries form baseModel
-            //e.State has diff queries like insert update delete, based on that this will proceed
+            .Entries()
+            .Where(e => e.Entity is BaseModel && (e.State == EntityState.Added) || (e.State == EntityState.Modified));
         foreach(var entry in entries)
         {
             if(entry.State == EntityState.Added)
@@ -25,6 +24,7 @@ public class AppDbContextSaveChangesInterceptor : SaveChangesInterceptor
             }
         }
     }
+    
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
         UpdateTimeStamps(eventData);

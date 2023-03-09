@@ -2,17 +2,17 @@
 # content-type : application/json"
 
 # {
-#     "name": "Shoe", "price" : 100, "description" : "Nike Shoe - New Arrival"
+#     "name": "Boots", "price" : 110, "description" : "Crucj"
 # }
 
-# GET https://localhost:7656/products
+GET https://localhost:7656/products?keyword=Sa
 
-DELETE https://localhost:7656/products/2
+# DELETE https://localhost:7656/products/2
 
 # PUT https://localhost:7656/products/2 HTTP/1.1
 # content-type : application/json"
 
 # {
-#     "name": "Mens Boots", "price" : 100, "description" : "Nike Shoe - New Arrival"
+#     "name": "Sandals", "price" : 100, "description" : "Nike Shoe - New Arrival"
 # }
 

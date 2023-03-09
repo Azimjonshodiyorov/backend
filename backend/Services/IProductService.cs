@@ -5,5 +5,4 @@ namespace NetCoreDemo.Services;
 
 public interface IProductService : ICrudService<Product, ProductDTO>
 {
-
 }

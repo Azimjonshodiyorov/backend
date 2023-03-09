@@ -27,7 +27,7 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICrudService<Product, ProductDTO>, CrudService<Product, ProductDTO>>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 
 var app = builder.Build();
