@@ -28,7 +28,7 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
 
     public async Task<TModel?> GetAsync(int id)
     {
-        return await _dbContext.Set<TModel>().AsNoTracking().FindAsync(id);
+        return await _dbContext.Set<TModel>().FindAsync(id);
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -43,11 +43,11 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         return true;
     }
 
-    public virtual async Task<ICollection<TModel>> GetAllAsync(ICrudFilter? filter)
+    public virtual async Task<ICollection<TModel>> GetAllAsync(PaginationParams @params)
     {
         return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
-    }    
-
+    }
+    
     public async Task<TModel?> UpdateAsync(int id, TDto request)
     {
         var item = await GetAsync(id);
