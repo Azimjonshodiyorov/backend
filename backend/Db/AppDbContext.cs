@@ -27,14 +27,28 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-         modelBuilder.Entity<Product>()
+        modelBuilder.Entity<Category>()
+            .HasIndex(c => c.Name);
+
+        modelBuilder.Entity<Product>()
             .Property(s => s.UpdatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
         
-         modelBuilder.Entity<Product>()
+        modelBuilder.Entity<Product>()
             .Property(s => s.CreatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        modelBuilder.Entity<Category>()
+            .Property(s => s.UpdatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+        
+        modelBuilder.Entity<Category>()
+            .Property(s => s.CreatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
     }
 
     public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; } = null!;
+
 }

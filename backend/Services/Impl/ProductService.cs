@@ -9,32 +9,60 @@ using System.Collections.Generic;
 
 public class ProductService : CrudService<Product, ProductDTO>, IProductService
 {
-  public ProductService(AppDbContext dbContext) : base(dbContext)
-  {
-  }
+    public ProductService(AppDbContext dbContext) : base(dbContext)
+    {
+    }
 
-  public async override Task<ICollection<Product>> GetAllAsync(PaginationParams @params)
-  {
+    public async override Task<ICollection<Product>> GetAllAsync(PaginationParams @params)
+    {
         return await _dbContext.Products.AsNoTracking()
                         .OrderBy(p => p.Id)
+                        .Include(p => p.Category)
                         .Skip((@params.Page - 1) * @params.ItemsPerPage)
                         .Take(@params.ItemsPerPage)
                         .ToListAsync();
-  }
+    }
 
-  public async Task<ICollection<Product>> GetByNameAsync(ICrudFilter? filter)
-  { 
-        var productFilter = (ProductFilterDTO?)filter;
-            var query = _dbContext.Products.Where(c => true);
+    public async override Task<Product?> GetAsync(int id)
+    {
+          var product = await base.GetAsync(id);
+          if (product is null)
+          {
+              return null;
+          }
+          await _dbContext.Entry(product).Reference(s => s.Category).LoadAsync();
+          return product;
+    }
 
-            if (productFilter?.Name is not null)
-            {
-                query = query.Where(c => c.Name == productFilter.Name);
-            }
-            if (productFilter?.Keyword is not null && !string.IsNullOrEmpty(productFilter?.Keyword))
-            {
-                query = query.Where(c => c.Name.Contains(productFilter!.Keyword));
-            }
-            return await query.OrderByDescending(c => c.CreatedAt).ToListAsync(); 
+    public async Task<ICollection<Product>> GetByNameAsync(string name, string keyword)
+    {
+        var query = _dbContext.Products.Where(c => true);
+
+        if (name is not null)
+        {
+          query = query.Where(c => c.Name.ToLower() == name.ToLower());
+        }
+        if (keyword is not null && !string.IsNullOrEmpty(keyword))
+        {
+          query = query.Where(c => c.Name.ToLower().Contains(keyword.ToLower()));
+        }
+        return await query.OrderByDescending(c => c.CreatedAt).ToListAsync();
+    }
+
+    public async Task<ICollection<Product>> GetByPriceAsync(double price)
+    {
+        var query = _dbContext.Products.Where(c => true);
+        query = query.Where(c => c.Price == price);
+
+        return await query.OrderByDescending(c => c.CreatedAt).ToListAsync();
+
+    }
+
+    public async Task<ICollection<Product>> GetByPriceRangeAsync(double min, double max)
+    {
+        var query = _dbContext.Products.Where(c => true);
+        query = query.Where(c => c.Price >= min && c.Price <= max);
+
+        return await query.OrderByDescending(c => c.CreatedAt).ToListAsync();
     }
 }

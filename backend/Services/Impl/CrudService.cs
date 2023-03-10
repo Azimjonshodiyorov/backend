@@ -26,7 +26,7 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         return item;
     }
 
-    public async Task<TModel?> GetAsync(int id)
+    public virtual async Task<TModel?> GetAsync(int id)
     {
         return await _dbContext.Set<TModel>().FindAsync(id);
     }

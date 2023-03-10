@@ -1,6 +1,7 @@
 namespace NetCoreDemo.Services;
 
 using NetCoreDemo.Models;
+using NetCoreDemo.DTOs;
 
 public interface ICrudService<TModel, TDto>
 {
