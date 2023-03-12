@@ -45,7 +45,15 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
 
     public virtual async Task<ICollection<TModel>> GetAllAsync(PaginationParams @params)
     {
-        return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
+        if(@params is null)
+        {
+            return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
+        }
+        return await _dbContext.Set<TModel>().AsNoTracking()
+                        .OrderBy(p => p.Id)
+                        .Skip((@params.Page - 1) * @params.ItemsPerPage)
+                        .Take(@params.ItemsPerPage)
+                        .ToListAsync();
     }
     
     public async Task<TModel?> UpdateAsync(int id, TDto request)

@@ -1,0 +1,48 @@
+# POST https://localhost:7656/images HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "Url" : [ "https://u=image.png" ]
+# }
+
+
+
+# GET https://localhost:7656/images
+
+# PUT https://localhost:7656/images/2 HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "Url" : [ "https://u=image1.png" ,"https://u=image2.png", "https://u=image.png" ]
+# }
+
+
+# DELETE https://localhost:7656/images/4
+
+# PUT https://localhost:7656/products/2 HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "name": "Sandals", "price" : 6, "description" : "Nike Shoe - New Arrival" ,"categoryId" :2
+# }
+
+
+
+# POST https://localhost:7656/categories HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "name": "Electronics"
+# }
+
+# PUT https://localhost:7656/categories/1 HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "name": "Bag"
+# }
+
+# GET https://localhost:7656/categories/1
+# GET https://localhost:7656/categories?page=6&itemsperpage=2
+
+# 

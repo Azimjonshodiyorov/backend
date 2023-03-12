@@ -20,7 +20,12 @@ public class ProductController : CrudController<Product, ProductDTO>
   public override async Task<ICollection<Product>> GetAll()
   {
       var @params = Request.QueryString.ParseParams<PaginationParams>();
-      return await _productService.GetAllAsync(@params);
+      if(@params is not null)
+      {
+          return await _productService.GetAllAsync(@params);
+      }
+      return await base.GetAll();
+      
   }
 
   [HttpGet("filter")]
@@ -41,5 +46,15 @@ public class ProductController : CrudController<Product, ProductDTO>
         return await _productService.GetByPriceRangeAsync((double)price_min, (double)price_max);
       }
       return await base.GetAll();
-    }
+  }
+
+  [HttpGet("category")]
+  public async Task<ICollection<Product>> GetByCategory(int? id)
+  {
+      if(id is not null)
+      {
+          return await _productService.GetByCategoryAsync((int)id);
+      }
+      return await base.GetAll();
+  }
 }

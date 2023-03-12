@@ -45,10 +45,29 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Category>()
             .Property(s => s.CreatedAt)
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
+        
+        modelBuilder.Entity<Image>()
+            .Property(s => s.UpdatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+        
+        modelBuilder.Entity<Image>()
+            .Property(s => s.CreatedAt)
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.Images)
+            .WithOne()
+            .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<Product>()
+            .Navigation(p => p.Images)
+            .AutoInclude();
 
     }
 
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<Image> Images { get; set; } = null!;
+
 
 }

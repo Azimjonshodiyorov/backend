@@ -4,6 +4,7 @@ using NetCoreDemo.DTOs;
 using NetCoreDemo.Models;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
+using NetCoreDemo.Common;
 
 public class CrudController<TModel, TDto> : ApiControllerBase
     where TModel : BaseModel, new()
@@ -21,10 +22,9 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     public async Task<IActionResult> Create(TDto request)
     {
         var item = await _service.CreateAsync(request);
-        Console.WriteLine($"first request for products {request}");
         if(item is null)
         {
-            return BadRequest("Product not created");
+            return BadRequest("Item created successfully");
         }
         return Ok(item);
     }
