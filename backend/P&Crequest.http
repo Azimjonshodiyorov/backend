@@ -1,44 +1,52 @@
-# POST https://localhost:7656/products HTTP/1.1
-# content-type : application/json"
+###
+POST https://localhost:7656/products HTTP/1.1
+content-type : application/json"
 
-# {
-#     "name": "Charger", "price" : 9.123, "description" : "Crucj", "category": "Shoes", "categoryId" : 1,
-#     "images" : {"url" : ["https://image.png","https://image.png","https://image.png" ]} 
-# }
+{
+    "name": "Charger", "price" : 9.123, "description" : "Crucj", "category": "Shoes", "categoryId" : 4,
+    "images" : {"url" : ["https://image.png","https://image.png","https://image.png" ]} 
+}
+###
+GET https://localhost:7656/products?page=1&itemsperpage=3
 
-# GET https://localhost:7656/products?page=1&itemsperpage=10
+###
+GET https://localhost:7656/products/category?id=1
 
-# GET https://localhost:7656/products/category?id=1
-
-# GET https://localhost:7656/products/5
-
-
-# 
-DELETE https://localhost:7656/products/8
-
-# PUT https://localhost:7656/products/2 HTTP/1.1
-# content-type : application/json"
-
-# {
-#     "name": "Sandals", "price" : 6, "description" : "Nike Shoe - New Arrival" ,"categoryId" :2
-# }
+###
+GET https://localhost:7656/products
 
 
+###
+DELETE https://localhost:7656/products/1
 
-# POST https://localhost:7656/categories HTTP/1.1
-# content-type : application/json"
+###
+PUT https://localhost:7656/products/2 HTTP/1.1
+content-type : application/json"
 
-# {
-#     "name": "Electronics", "images" : {"url" : ["https://image.png"]} 
-# }
+{
+    "name": "Sandals", "price" : 6, "description" : "Nike Shoe - New Arrival" ,"categoryId" :2
+}
 
-# PUT https://localhost:7656/categories/1 HTTP/1.1
-# content-type : application/json"
 
-# {
-#     "name": "Bag"
-# }
 
-# GET https://localhost:7656/categories/1
-# GET https://localhost:7656/categories?page=1&itemsperpage=2
+### 
+POST https://localhost:7656/categories HTTP/1.1
+content-type : application/json"
+
+{
+    "name": "Electronics", "images" : {"url" : ["https://image.png"]} 
+}
+
+###
+PUT https://localhost:7656/categories/1 HTTP/1.1
+content-type : application/json"
+
+{
+    "name": "Bag"
+}
+
+###
+GET https://localhost:7656/categories/1
+###
+GET https://localhost:7656/categories?page=1&itemsperpage=10
 

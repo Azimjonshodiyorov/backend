@@ -28,8 +28,8 @@ public class CategoryController : CrudController<Category, CategoryDTO>
   }
 
   [HttpGet("{id}/products")]
-  public async Task<ICollection<Product>> GetProducts(int id)
+  public async Task<IEnumerable<Product>> GetProducts(int id)
   {
-    return await _categoryService.GetProductsAsync(id);
+    return await _categoryService.GetProductsByCategoryAsync(id);
   }
 }

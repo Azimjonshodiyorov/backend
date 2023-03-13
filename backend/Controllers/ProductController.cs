@@ -47,14 +47,4 @@ public class ProductController : CrudController<Product, ProductDTO>
       }
       return await base.GetAll();
   }
-
-  [HttpGet("category")]
-  public async Task<ICollection<Product>> GetByCategory(int? id)
-  {
-      if(id is not null)
-      {
-          return await _productService.GetByCategoryAsync((int)id);
-      }
-      return await base.GetAll();
-  }
 }

@@ -13,20 +13,6 @@ public class ProductService : CrudService<Product, ProductDTO>, IProductService
     {
     }
 
-    public async override Task<ICollection<Product>> GetAllAsync(PaginationParams @params)
-    {
-        if(@params is null)
-        {
-            return await base.GetAllAsync(null);
-        }
-        return await _dbContext.Products.AsNoTracking()
-                        .OrderBy(p => p.Id)
-                        .Include(p => p.Category)
-                        .Skip((@params.Page - 1) * @params.ItemsPerPage)
-                        .Take(@params.ItemsPerPage)
-                        .ToListAsync();
-    }
-
     public async override Task<Product?> GetAsync(int id)
     {
           var product = await base.GetAsync(id);
@@ -67,13 +53,5 @@ public class ProductService : CrudService<Product, ProductDTO>, IProductService
         query = query.Where(c => c.Price >= min && c.Price <= max);
 
         return await query.OrderByDescending(c => c.CreatedAt).Include(p => p.Category).ToListAsync();
-    }
-
-    public async Task<ICollection<Product>> GetByCategoryAsync(int id)
-    {
-        var query = _dbContext.Products.Where(p => true);
-        query = query.Where(p => p.CategoryId == id);
-
-        return await query.OrderByDescending(c => c.CreatedAt).ToListAsync();
     }
 }

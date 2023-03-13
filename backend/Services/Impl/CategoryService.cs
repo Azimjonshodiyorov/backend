@@ -39,16 +39,18 @@ public class CategoryService : CrudService<Category, CategoryDTO>, ICategoryServ
                         .ToListAsync();
     }
 
-    public async Task<ICollection<Product>> GetProductsAsync(int id)
+    public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int id)
     {
         var category = await base.GetAsync(id);
         if(category is null) 
         {
            return null;
         }
-        var query = _dbContext.Categories.Where(c => c.Id == id).Include(c => c.Products).Select(c => c.Products);
-        return (ICollection<Product>)await query.ToListAsync();
-        // return await _dbContext.Categories
-        //     .Where(c => c.Products.Select(p => p.Id).Contains(id)).ToListAsync();
+        var query = _dbContext.Categories.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
+        if(query is null)
+        {
+            return null;
+        }
+        return query.Products;
     }
 }

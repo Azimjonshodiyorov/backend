@@ -7,7 +7,7 @@
 
 
 
-# GET https://localhost:7656/images
+GET https://localhost:7656/images
 
 # PUT https://localhost:7656/images/2 HTTP/1.1
 # content-type : application/json"
@@ -17,7 +17,7 @@
 # }
 
 
-# DELETE https://localhost:7656/images/4
+# DELETE https://localhost:7656/images/12
 
 # PUT https://localhost:7656/products/2 HTTP/1.1
 # content-type : application/json"
@@ -42,7 +42,7 @@
 #     "name": "Bag"
 # }
 
-# GET https://localhost:7656/categories/1
+# DELETE https://localhost:7656/categories/2
 # GET https://localhost:7656/categories?page=6&itemsperpage=2
 
 # 

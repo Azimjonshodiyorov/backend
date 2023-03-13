@@ -3,7 +3,7 @@ namespace NetCoreDemo.Models;
 public class PaginationParams
 {
     private const int _maxItemsPerPage = 50;
-    private int itemsPerPage;
+    private int itemsPerPage = 200;
 
     public int Page { get; set; } = 1;
     public int ItemsPerPage 

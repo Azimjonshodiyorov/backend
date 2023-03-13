@@ -5,5 +5,5 @@ using NetCoreDemo.DTOs;
 
 public interface ICategoryService : ICrudService<Category, CategoryDTO>
 {
-    Task<ICollection<Product>> GetProductsAsync(int id);
+    Task<IEnumerable<Product>> GetProductsByCategoryAsync(int id);
 }

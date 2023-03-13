@@ -57,7 +57,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Product>()
             .HasOne(p => p.Images)
             .WithOne()
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Product>()
             .Navigation(p => p.Images)
