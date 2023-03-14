@@ -3,28 +3,28 @@ POST https://localhost:7656/products HTTP/1.1
 content-type : application/json"
 
 {
-    "name": "Charger", "price" : 9.123, "description" : "Crucj", "category": "Shoes", "categoryId" : 4,
+    "name": "Charger", "price" : 9.123, "description" : "Crucj", "category": "Shoes", "categoryId" : 5,
     "images" : {"url" : ["https://image.png","https://image.png","https://image.png" ]} 
 }
 ###
 GET https://localhost:7656/products?page=1&itemsperpage=3
 
 ###
-GET https://localhost:7656/products/category?id=1
+GET https://localhost:7656/products/filter?name=charger&price_min=1&price_max=10&categoryId=1
 
 ###
-GET https://localhost:7656/products
+GET https://localhost:7656/products/2
 
 
 ###
-DELETE https://localhost:7656/products/1
+DELETE https://localhost:7656/products/3
 
 ###
 PUT https://localhost:7656/products/2 HTTP/1.1
 content-type : application/json"
 
 {
-    "name": "Sandals", "price" : 6, "description" : "Nike Shoe - New Arrival" ,"categoryId" :2
+    "name": "Sandals"
 }
 
 
@@ -46,7 +46,7 @@ content-type : application/json"
 }
 
 ###
-GET https://localhost:7656/categories/1
+GET https://localhost:7656/categories/5
 ###
 GET https://localhost:7656/categories?page=1&itemsperpage=10
 

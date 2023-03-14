@@ -4,11 +4,12 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Db;
 using Microsoft.EntityFrameworkCore;
+using NetCoreDemo.Repositories;
 
 public class CategoryService : CrudService<Category, CategoryDTO>, ICategoryService
 {
 
-  public CategoryService(AppDbContext dbContext) : base(dbContext)
+  public CategoryService(AppDbContext dbContext, ICategoryRepo repo) : base(dbContext, repo)
     {
     }
 
@@ -25,7 +26,7 @@ public class CategoryService : CrudService<Category, CategoryDTO>, ICategoryServ
         return category;
     }
 
-    public async override Task<ICollection<Category>> GetAllAsync(PaginationParams @params)
+    public async override Task<IEnumerable<Category>> GetAllAsync(PaginationParams @params)
     {
         if(@params is null)
         {

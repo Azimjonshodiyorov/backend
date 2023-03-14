@@ -1,10 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using NetCoreDemo.Models;
-using Npgsql;
-
 namespace NetCoreDemo.Db;
 
-public class AppDbContext : DbContext
+using Microsoft.EntityFrameworkCore;
+using NetCoreDemo.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
+public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
 {
     static AppDbContext()
     {
@@ -18,6 +19,8 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        base.OnConfiguring(optionsBuilder);
+
         var connString = _config.GetConnectionString("DefaultConnection");
         optionsBuilder
             .UseNpgsql(connString)
@@ -27,6 +30,15 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // modelBuilder.HasPostgresEnum<Role>(); // will create a enum type called "role" inside database
+        //     modelBuilder.Entity<User>(entity =>
+        //     {
+        //         entity.Property(e => e.Role).HasColumnType("role");
+        //         entity.HasIndex(e => e.Email).IsUnique();
+        //     }); // connect property "Role" to enum type "role"
+
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Category>()
             .HasIndex(c => c.Name);
 
@@ -63,11 +75,12 @@ public class AppDbContext : DbContext
             .Navigation(p => p.Images)
             .AutoInclude();
 
+        modelBuilder.AddIdentityConfig();
     }
 
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
-    public DbSet<Image> Images { get; set; } = null!;
+    public DbSet<Image> Pictures { get; set; } = null!;
 
 
 }

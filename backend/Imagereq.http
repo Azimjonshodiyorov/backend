@@ -1,3 +1,13 @@
+###
+POST https://localhost:7656/users/Signup HTTP/1.1
+content-type : application/json"
+
+{
+    "firstName" : "Anu", "lastName" : "Siraj", "email" : "anu.sraj@gmail.com", "password" : "Gr@y&At0m"
+}
+
+
+# ###
 # POST https://localhost:7656/images HTTP/1.1
 # content-type : application/json"
 
@@ -6,9 +16,10 @@
 # }
 
 
+# ###
+# GET https://localhost:7656/images/4
 
-GET https://localhost:7656/images
-
+# ###
 # PUT https://localhost:7656/images/2 HTTP/1.1
 # content-type : application/json"
 
@@ -16,8 +27,8 @@ GET https://localhost:7656/images
 #     "Url" : [ "https://u=image1.png" ,"https://u=image2.png", "https://u=image.png" ]
 # }
 
-
-# DELETE https://localhost:7656/images/12
+# ###
+# DELETE https://localhost:7656/images/4
 
 # PUT https://localhost:7656/products/2 HTTP/1.1
 # content-type : application/json"

@@ -1,18 +1,21 @@
-namespace NetCoreDemo.Services;
+namespace NetCoreDemo.Repositories;
 
 using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Db;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
-public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
+public class CrudRepo<TModel,TDto> : ICrudRepo<TModel, TDto>
     where TModel : BaseModel, new()
     where TDto : BaseDTO<TModel>
 {
     protected readonly AppDbContext _dbContext;
-    protected readonly ProductService _productService;
-
-    public CrudService(AppDbContext dbContext)
+    public CrudRepo(AppDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -38,7 +41,7 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         {
             return false;
         }
-        _dbContext.Remove(item);
+        _dbContext.Set<TModel>().Remove(item);
         await _dbContext.SaveChangesAsync();
         return true;
     }

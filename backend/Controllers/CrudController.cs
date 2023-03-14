@@ -32,37 +32,23 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TModel?>> Get(int id)
     {
-        var item = await _service.GetAsync(id);
-        if (item is null)
-        {
-            return NotFound("Item not found");
-        }
-        return item;
+        return Ok(await _service.GetAsync(id));
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult<TModel?>> Update(int id, TDto request)
     {
-        var item = await _service.UpdateAsync(id, request);
-        if(item is null)
-        {
-            return BadRequest("Item not found");
-        }
-        return item;
+        return Ok(await _service.UpdateAsync(id, request));
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        if (await _service.DeleteAsync(id))
-        {
-            return Ok(new { Message = "Item deleted successfully" });
-        }
-        return NotFound("Item not found");
+        return Ok(await _service.DeleteAsync(id));
     }
 
     [HttpGet]
-    public virtual async Task<ICollection<TModel>> GetAll()
+    public virtual async Task<IEnumerable<TModel>> GetAll()
     {
         return await _service.GetAllAsync(null);
     }

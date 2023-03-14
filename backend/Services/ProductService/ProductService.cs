@@ -6,10 +6,11 @@ using NetCoreDemo.Db;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using NetCoreDemo.Repositories;
 
 public class ProductService : CrudService<Product, ProductDTO>, IProductService
 {
-    public ProductService(AppDbContext dbContext) : base(dbContext)
+    public ProductService(AppDbContext dbContext, IProductRepo repo) : base(dbContext, repo)
     {
     }
 
@@ -53,5 +54,13 @@ public class ProductService : CrudService<Product, ProductDTO>, IProductService
         query = query.Where(c => c.Price >= min && c.Price <= max);
 
         return await query.OrderByDescending(c => c.CreatedAt).Include(p => p.Category).ToListAsync();
+    }
+
+    public async Task<ICollection<Product>> GetProductsByCategoryAsync(int categoryId)
+    {
+        var query = _dbContext.Products.Where(p => true);
+        query = query.Where(p => p.CategoryId == categoryId);
+
+        return await query.OrderByDescending(c => c.CreatedAt).ToListAsync();
     }
 }

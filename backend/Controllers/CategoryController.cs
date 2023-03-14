@@ -16,7 +16,7 @@ public class CategoryController : CrudController<Category, CategoryDTO>
   }
 
   [HttpGet]
-  public override async Task<ICollection<Category>> GetAll()
+  public override async Task<IEnumerable<Category>> GetAll()
   {
         var @params = Request.QueryString.ParseParams<PaginationParams>();
         if(@params is not null)

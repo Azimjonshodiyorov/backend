@@ -1,9 +1,9 @@
-namespace NetCoreDemo.Services;
+namespace NetCoreDemo.Repositories;
 
 using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 
-public interface ICrudService<TModel, TDto>
+public interface ICrudRepo<TModel, TDto>
 {
     Task<TModel?> CreateAsync(TDto request);
     Task<TModel?> GetAsync(int id);

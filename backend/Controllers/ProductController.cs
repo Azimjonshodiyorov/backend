@@ -17,7 +17,7 @@ public class ProductController : CrudController<Product, ProductDTO>
   }
 
   [HttpGet]
-  public override async Task<ICollection<Product>> GetAll()
+  public override async Task<IEnumerable<Product>> GetAll()
   {
       var @params = Request.QueryString.ParseParams<PaginationParams>();
       if(@params is not null)
@@ -29,7 +29,7 @@ public class ProductController : CrudController<Product, ProductDTO>
   }
 
   [HttpGet("filter")]
-  public async Task<ICollection<Product>> GetByFiltering(string? name, string? keyword, double? price, double? price_max, double? price_min)
+  public async Task<IEnumerable<Product>> GetByFiltering(string? name, string? keyword, double? price, double? price_max, double? price_min, int? categoryId)
   {
       if (name is not null || keyword is not null)
       {
@@ -44,6 +44,10 @@ public class ProductController : CrudController<Product, ProductDTO>
       if (price_max is not null && price_min is not null )
       {
         return await _productService.GetByPriceRangeAsync((double)price_min, (double)price_max);
+      }
+      if(categoryId is not null)
+      {
+          return await _productService.GetProductsByCategoryAsync((int)categoryId);
       }
       return await base.GetAll();
   }
