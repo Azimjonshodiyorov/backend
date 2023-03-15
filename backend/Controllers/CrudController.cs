@@ -5,7 +5,9 @@ using NetCoreDemo.Models;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreDemo.Common;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = "Admin")]
 public class CrudController<TModel, TDto> : ApiControllerBase
     where TModel : BaseModel, new()
     where TDto : BaseDTO<TModel>
@@ -29,6 +31,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
         return Ok(item);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TModel?>> Get(int id)
     {
@@ -47,6 +50,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
         return Ok(await _service.DeleteAsync(id));
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public virtual async Task<IEnumerable<TModel>> GetAll()
     {

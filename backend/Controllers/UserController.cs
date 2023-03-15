@@ -5,7 +5,9 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 public class UserController : ApiControllerBase
 {
     private readonly IUserService _service;
@@ -15,6 +17,7 @@ public class UserController : ApiControllerBase
         _service = service;
     }
 
+    [AllowAnonymous]
     [HttpPost("signup")]
     public async Task<IActionResult> SignUp(UserSignUpDTO request)
     {
@@ -26,6 +29,7 @@ public class UserController : ApiControllerBase
         return Ok(UserSignUpResponseDTO.FromUser((User)user));
     }
 
+    [AllowAnonymous]
     [HttpPost("signin")]    
     public async Task<IActionResult> SignIn(UserSignInDTO request)
     {

@@ -8,13 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 public class UserService : IUserService
 {
     private readonly UserManager<User> _userManager;
-    // private readonly RoleManager<IdentityRole<int>> _roleManager;
     private readonly IRoleService _roleservice;
+    private readonly ITokenService _tokenService;
 
-    public UserService(UserManager<User> userManager, IRoleService roleservice) 
+    public UserService(UserManager<User> userManager, IRoleService roleservice, ITokenService tokenService) 
     {
         _userManager = userManager;
         _roleservice = roleservice;
+        _tokenService = tokenService;
     }
 
   public async Task<User?> SignUpAsync(UserSignUpDTO request)
@@ -34,7 +35,7 @@ public class UserService : IUserService
             return null;
         }
 
-        var userRole = "Admin";
+        var userRole = "Customer";
         string[] rolesarray = new string[400];
 
         var roles = await _roleservice.CreateRoleAsync(userRole);
@@ -62,10 +63,6 @@ public class UserService : IUserService
         {
             return null;
         }
-        return new UserSignInResponseDTO
-        {
-            Token = "fake_Token",
-            Expiration = DateTime.Now.AddHours(1)
-        };
+        return await _tokenService.GenerateTokenAsync(user);
     }
 }

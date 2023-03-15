@@ -6,7 +6,9 @@ using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreDemo.Common;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = "Admin")]
 public class ProductController : CrudController<Product, ProductDTO>
 {
   private readonly IProductService _productService;
@@ -16,6 +18,7 @@ public class ProductController : CrudController<Product, ProductDTO>
       _productService = service;
   }
 
+  [AllowAnonymous]
   [HttpGet]
   public override async Task<IEnumerable<Product>> GetAll()
   {
@@ -27,7 +30,7 @@ public class ProductController : CrudController<Product, ProductDTO>
       return await base.GetAll();
       
   }
-
+  [AllowAnonymous]
   [HttpGet("filter")]
   public async Task<IEnumerable<Product>> GetByFiltering(string? name, string? keyword, double? price, double? price_max, double? price_min, int? categoryId)
   {
