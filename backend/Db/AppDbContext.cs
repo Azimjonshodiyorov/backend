@@ -5,8 +5,8 @@ using NetCoreDemo.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
-{
+    public class AppDbContext : IdentityDbContext<User, IdentityRole<int>, int>
+    {
     static AppDbContext()
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

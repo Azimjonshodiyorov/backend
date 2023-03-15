@@ -47,13 +47,16 @@ builder.Services
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+// builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICrudRepo<Image, ImageDTO>, CrudRepo<Image,ImageDTO>>();
 builder.Services.AddScoped<IProductRepo, ProductRepo>().AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>().AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+
 
 var app = builder.Build();
 

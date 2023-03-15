@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 public class UserService : IUserService
 {
     private readonly UserManager<User> _userManager;
+    // private readonly RoleManager<IdentityRole<int>> _roleManager;
+    private readonly IRoleService _roleservice;
 
-    public UserService(UserManager<User> userManager) 
+    public UserService(UserManager<User> userManager, IRoleService roleservice) 
     {
-         _userManager = userManager;
+        _userManager = userManager;
+        _roleservice = roleservice;
     }
 
-    public async Task<User?> SignUpAsync(UserSignUpDTO request)
+  public async Task<User?> SignUpAsync(UserSignUpDTO request)
     {
-        Console.WriteLine($"The request in UserService first is {request.FirstName}, {request.LastName}, {request.Email}, {request.Password}");
-
         var user = new User
         {
             FirstName = request.FirstName,
@@ -25,13 +26,46 @@ public class UserService : IUserService
             UserName = request.Email,
             Email = request.Email,
         };
+
         var result = await _userManager.CreateAsync(user, request.Password);
-        Console.WriteLine($"After CreateAsync {result}");
 
         if (!result.Succeeded)
         {
-            return user;
+            return null;
         }
+
+        var userRole = "Admin";
+        string[] rolesarray = new string[400];
+
+        var roles = await _roleservice.CreateRoleAsync(userRole);
+        if(roles is null)
+        {
+            throw new Exception("Role cannot created");
+        }
+        for (int i = 0; i < 400; i++)
+        {
+            rolesarray[i] = roles;
+        }
+        rolesarray.Concat(new string[] { roles });
+
+        await _userManager.AddToRolesAsync(user, rolesarray);
         return user;
+    }
+    public async Task<UserSignInResponseDTO?> SignInAsync(UserSignInDTO request)
+    {
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if(user is null)
+        {
+            return null;
+        }
+        if(!await _userManager.CheckPasswordAsync(user,request.Password ))
+        {
+            return null;
+        }
+        return new UserSignInResponseDTO
+        {
+            Token = "fake_Token",
+            Expiration = DateTime.Now.AddHours(1)
+        };
     }
 }

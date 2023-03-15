@@ -23,6 +23,17 @@ public class UserController : ApiControllerBase
         {
             return BadRequest();
         }
-        return Ok(UserSignUpResponseDTO.FromUser(user));
+        return Ok(UserSignUpResponseDTO.FromUser((User)user));
+    }
+
+    [HttpPost("signin")]    
+    public async Task<IActionResult> SignIn(UserSignInDTO request)
+    {
+        var response = await _service.SignInAsync(request);
+        if (response is null)
+        {
+            return Unauthorized();
+        }
+        return Ok(response);
     }
 }

@@ -3,8 +3,31 @@ POST https://localhost:7656/users/Signup HTTP/1.1
 content-type : application/json"
 
 {
-    "firstName" : "Anu", "lastName" : "Siraj", "email" : "anu.sraj@gmail.com", "password" : "Gr@y&At0m"
+    "firstName" : "Anu", "lastName" : "Siraj", "email" : "shu@gmail.com", "password" : "Gr@y&At0m"
 }
+
+###
+POST https://localhost:7656/users/signin HTTP/1.1
+content-type : application/json"
+
+{
+    "email" : "shu@gmail.com", "password" : "Gr@y&At0m"
+}
+
+###
+POST https://localhost:7656/roles HTTP/1.1
+content-type : application/json"
+
+{
+    "roleName" : "DEV"
+}
+###
+# POST https://localhost:7656/users/Signin HTTP/1.1
+# content-type : application/json"
+
+# {
+#     "firstName" : "Anu", "lastName" : "Siraj", "email" : "anu.sraj@gmail.com", "password" : "Gr@y&At0m"
+# }
 
 
 # ###

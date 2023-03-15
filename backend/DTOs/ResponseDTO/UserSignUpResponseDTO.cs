@@ -1,5 +1,6 @@
 namespace NetCoreDemo.DTOs;
 
+using System;
 using NetCoreDemo.Models;
 public class UserSignUpResponseDTO
 {

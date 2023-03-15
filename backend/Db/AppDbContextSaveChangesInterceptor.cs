@@ -20,7 +20,7 @@ public class AppDbContextSaveChangesInterceptor : SaveChangesInterceptor
             }
             else
             {
-                ((BaseModel)entry.Entity).UpdatedAt = DateTime.Now;
+                // ((BaseModel)entry.Entity).UpdatedAt = DateTime.Now;
             }
         }
     }
