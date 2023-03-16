@@ -8,7 +8,7 @@ using NetCoreDemo.Common;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 
-[Authorize(Roles = "Admin")]
+// [Authorize(Roles = "Admin")]
 public class ProductController : CrudController<Product, ProductDTO>
 {
   private readonly IProductService _productService;

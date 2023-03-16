@@ -1,5 +1,7 @@
 namespace NetCoreDemo.Models;
 
+using System.Text.Json.Serialization;
+
 public class Product : BaseModel
 {
     public string Name { get; set; } = null!;

@@ -3,9 +3,12 @@ POST https://localhost:7656/products HTTP/1.1
 content-type : application/json"
 
 {
-    "name": "Charger", "price" : 9.123, "description" : "Crucj", "category": "Shoes", "categoryId" : 8,
-    "images" : {"url" : ["https://image.png","https://image.png","https://image.png"] } 
+    "name": "Charger", "price" : 9.123, "category": "Shoes","description" : "Crucj", "categoryId" : 10,
+    "images" : {"url" : ["https://image.png","https://image.png","https://image.png"]}
+    
 }
+
+
 ###
 GET https://localhost:7656/products?page=1&itemsperpage=3
 
@@ -20,11 +23,12 @@ GET https://localhost:7656/products/2
 DELETE https://localhost:7656/products/3
 
 ###
-PUT https://localhost:7656/products/34 HTTP/1.1
+PUT https://localhost:7656/products/36 HTTP/1.1
 content-type : application/json"
 
 {
-    "name": "Sandals","description" : "Crucj", "images" : {"url" : ["https://image.png","https://image.png","https://image.png"] }
+    "name": "Sandals","description" : "Crucj", "categoryId" : 10,
+    "images" : {"url" : ["https://image.png","https://image.png","https://image.png"] }
 }
 
 
@@ -38,11 +42,11 @@ content-type : application/json"
 }
 
 ###
-PUT https://localhost:7656/categories/1 HTTP/1.1
+PUT https://localhost:7656/categories/10 HTTP/1.1
 content-type : application/json"
 
 {
-    "name": "Bag"
+    "name": "Electronics", "images" : {"url" : ["https://image.png"]}
 }
 
 ###

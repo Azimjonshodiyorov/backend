@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetCoreDemo.Common;
 using Microsoft.AspNetCore.Authorization;
 
-[Authorize(Roles = "Admin")]
+// [Authorize(Roles = "Admin")]
 public class CrudController<TModel, TDto> : ApiControllerBase
     where TModel : BaseModel, new()
     where TDto : BaseDTO<TModel>
@@ -26,7 +26,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
         var item = await _service.CreateAsync(request);
         if(item is null)
         {
-            return BadRequest("Item created successfully");
+            return BadRequest("Item cannot create");
         }
         return Ok(item);
     }

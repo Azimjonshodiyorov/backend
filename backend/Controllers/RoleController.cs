@@ -17,15 +17,15 @@ public class RoleController : ApiControllerBase
         _service = service;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> CreateRole(string roleName)
+    [HttpPost("add")]
+    public async Task<IActionResult> CreateRole([FromBody]string roleName)
     {
-        Console.WriteLine($"------------The role name is {roleName}------------");
-        var role = await _service.CreateRoleAsync(roleName);
-        if(role is null)
-        {
-            return BadRequest();
-        }
+        Console.WriteLine($"------------The role name in RoleController is {roleName}------------");
+        // var role = await _service.CreateRoleAsync(roleName);
+        // if(role is null)
+        // {
+        //     return BadRequest();
+        // }
         return Ok();
     }
 

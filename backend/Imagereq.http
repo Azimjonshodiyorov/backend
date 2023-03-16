@@ -3,7 +3,7 @@ POST https://localhost:7656/users/Signup HTTP/1.1
 content-type : application/json"
 
 {
-    "firstName" : "Anu", "lastName" : "Siraj", "email" : "anu.sirajencir@gmail.com", "password" : "Gr@y&At0m"
+    "firstName" : "Anu", "lastName" : "Siraj", "email" : "nu.sirajencir@gmail.com", "password" : "Gr@y&At0m"
 }
 
 ###
@@ -15,12 +15,11 @@ content-type : application/json"
 }
 
 ###
-POST https://localhost:7656/roles HTTP/1.1
+POST https://localhost:7656/roles/add 
 content-type : application/json"
 
 {
-    {"Name" : "HR"}
-    
+    "roleName" : "HR"
 }
 ###
 # POST https://localhost:7656/users/Signin HTTP/1.1
