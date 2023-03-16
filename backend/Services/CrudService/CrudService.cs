@@ -27,7 +27,11 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
 
     public async Task<TModel?> CreateAsync(TDto request)
     {
+        Console.WriteLine($" ==========CrudServiceThe Cart request is {request}==============");
         var result =  await _repo.CreateAsync(request);
+                Console.WriteLine($" ************CrudServiceThe Cart request is {request}**********");
+
+
         if(result is null)
         {
             throw new Exception("Cannot create item");

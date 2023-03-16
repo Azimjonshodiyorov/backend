@@ -11,5 +11,5 @@ public class Product : BaseModel
     public int CategoryId { get; set; }
     public Image Images { get; set; } = null!;
     public int? ImageId { get; set; }
-    // public ICollection<CartProduct> CartLinks {get; set; } = null!;
+    public ICollection<CartProduct> CartLinks {get; set; } = null!;
 }

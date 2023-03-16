@@ -8,9 +8,17 @@ content-type : application/json"
     
 }
 
+###
+GET https://localhost:7656/carts HTTP/1.1
+content-type : application/json"
+
+{
+    
+}
+
 
 ###
-GET https://localhost:7656/products?page=1&itemsperpage=3
+GET https://localhost:7656/carts
 
 ###
 GET https://localhost:7656/products/filter?name=charger&price_min=1&price_max=10&categoryId=1
@@ -27,7 +35,7 @@ PUT https://localhost:7656/products/36 HTTP/1.1
 content-type : application/json"
 
 {
-    "name": "Sandals","description" : "Crucj", "categoryId" : 10,
+    "name": "Sandals","description" : "Crucj", "categoryId" : 10, "price" : 10,
     "images" : {"url" : ["https://image.png","https://image.png","https://image.png"] }
 }
 

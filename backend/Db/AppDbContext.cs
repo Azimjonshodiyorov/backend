@@ -39,6 +39,9 @@ using Microsoft.AspNetCore.Identity;
 
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<CartProduct>()
+            .HasKey(p => new { p.CartId, p.ProductId });
+
         modelBuilder.Entity<Category>()
             .HasIndex(c => c.Name);
 
@@ -81,6 +84,8 @@ using Microsoft.AspNetCore.Identity;
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Image> Pictures { get; set; } = null!;
+    public DbSet<Cart> Carts { get; set; } = null!;
+    public DbSet<CartProduct> CartProducts { get; set; } = null!;
 
 
 }

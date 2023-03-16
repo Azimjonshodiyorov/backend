@@ -9,7 +9,7 @@ using NetCoreDemo.Repositories;
 public class CategoryService : CrudService<Category, CategoryDTO>, ICategoryService
 {
 
-  public CategoryService(AppDbContext dbContext, ICategoryRepo repo) : base(dbContext, repo)
+    public CategoryService(AppDbContext dbContext, ICategoryRepo repo) : base(dbContext, repo)
     {
     }
 

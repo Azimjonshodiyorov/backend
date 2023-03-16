@@ -23,6 +23,8 @@ public class CrudRepo<TModel,TDto> : ICrudRepo<TModel, TDto>
     public async Task<TModel?> CreateAsync(TDto request)
     {
         var item = new TModel();
+        Console.WriteLine($" ==========Repo The Cart request is {request}==============");
+
         request.UpdateModel(item);
         _dbContext.Add(item);
         await _dbContext.SaveChangesAsync(); 

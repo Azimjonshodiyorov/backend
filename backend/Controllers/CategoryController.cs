@@ -9,7 +9,7 @@ using NetCoreDemo.Common;
 [Route("Categories")]
 public class CategoryController : CrudController<Category, CategoryDTO>
 {
-    private readonly ICategoryService _categoryService;
+  private readonly ICategoryService _categoryService;
   public CategoryController(ICategoryService service) : base(service)
   {
         _categoryService = service;

@@ -23,6 +23,8 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(TDto request)
     {
+        Console.WriteLine($" ==========Controller The Cart request is {request}==============");
+
         var item = await _service.CreateAsync(request);
         if(item is null)
         {
