@@ -6,6 +6,6 @@ using NetCoreDemo.Models;
 public interface IRoleService
 {
     Task<string> CreateRoleAsync(string roleName);
-    // Task<UserSignInResponseDTO?> SignInAsync(UserSignInDTO request);
+    Task<bool> DeleteRoleAsync(string roleName);
 
 }

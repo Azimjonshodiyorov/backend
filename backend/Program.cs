@@ -12,17 +12,21 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.ConfigureKestrel(options =>
-        {
-            options.ListenLocalhost(7655);
-
-            options.ListenLocalhost(7656, listenOptions =>
+    builder.WebHost.UseKestrel(options =>
             {
-                listenOptions.UseHttps();
+                options.ListenLocalhost(7655);
+
+                options.ListenLocalhost(7656, listenOptions =>
+                {
+                    listenOptions.UseHttps();
+                });
             });
-        });
 
 // Add services to the container.
 
@@ -78,12 +82,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICrudRepo<Image, ImageDTO>, CrudRepo<Image,ImageDTO>>();
 builder.Services.AddScoped<IProductRepo, ProductRepo>().AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>().AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
 
 
 var app = builder.Build();
+
+app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -103,12 +109,15 @@ if (app.Environment.IsDevelopment())
     }
 }
 
-app.UseHttpsRedirection();
+    
 
-app.UseAuthentication();
+    app.UseAuthentication();
 
-app.UseAuthorization();
+    app.UseAuthorization();
 
-app.MapControllers();
+    app.MapControllers();
 
-app.Run();
+    app.Run();
+
+    }
+}

@@ -29,4 +29,16 @@ public class RoleService : IRoleService
         return roleName;
     }
 
+  public async Task<bool> DeleteRoleAsync(string roleName)
+  {
+    if(await _roleManager.FindByNameAsync((string)roleName) is not null)
+    {
+        await _roleManager.DeleteAsync(new IdentityRole<int>{
+
+                Name = roleName
+
+            });
+    }
+    return false;
+  }
 }
