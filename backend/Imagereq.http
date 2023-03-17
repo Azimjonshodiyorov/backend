@@ -3,7 +3,7 @@ POST https://localhost:7656/users/Signup HTTP/1.1
 content-type : application/json"
 
 {
-    "firstName" : "Anu", "lastName" : "Siraj", "email" : "anu.srajencir@gmail.com", "password" : "Gr@y&At0m"
+    "firstName" : "Anu", "lastName" : "Siraj", "email" : "angu.srajencir@gmail.com", "password" : "Gr@y&At0m"
 }
 
 ###
@@ -31,12 +31,20 @@ content-type : application/json"
 
 
 # ###
-# POST https://localhost:7656/images HTTP/1.1
-# content-type : application/json"
+POST https://localhost:7656/images HTTP/1.1
+content-type : application/json"
 
-# {
-#     "Url" : [ "https://u=image.png" ]
-# }
+{
+    "Url" : [ "https://u=image.png" ]
+}
+###
+POST https://localhost:7656/carts HTTP/1.1
+content-type : application/json"
+
+{
+  "cartName": "Cart2",
+  "cartStatus": "not available"
+}
 
 
 # ###

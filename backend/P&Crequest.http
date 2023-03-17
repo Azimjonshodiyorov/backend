@@ -24,7 +24,7 @@ GET https://localhost:7656/carts
 GET https://localhost:7656/products/filter?name=charger&price_min=1&price_max=10&categoryId=1
 
 ###
-GET https://localhost:7656/products/2
+GET https://localhost:7656/products
 
 
 ###

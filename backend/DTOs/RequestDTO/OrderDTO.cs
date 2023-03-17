@@ -2,13 +2,13 @@ using NetCoreDemo.Models;
 
 namespace NetCoreDemo.DTOs;
 
-public class CartDTO : BaseDTO<Cart>
+public class OrderDTO : BaseDTO<Order>
 {
   public string CartName { get; set; } = null!;
   public string CartStatus { get; set; } = null!;
-  public override void UpdateModel(Cart model)
+  public override void UpdateModel(Order model)
   {
-        model.CartName = CartName;
-        model.CartStatus = CartStatus;
+        model.OrderName = CartName;
+        model.OrderStatus = CartStatus;
   }
 }

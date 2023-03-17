@@ -30,17 +30,10 @@ using Microsoft.AspNetCore.Identity;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.HasPostgresEnum<Role>(); // will create a enum type called "role" inside database
-        //     modelBuilder.Entity<User>(entity =>
-        //     {
-        //         entity.Property(e => e.Role).HasColumnType("role");
-        //         entity.HasIndex(e => e.Email).IsUnique();
-        //     }); // connect property "Role" to enum type "role"
-
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<CartProduct>()
-            .HasKey(p => new { p.CartId, p.ProductId });
+        modelBuilder.Entity<OrderProduct>()
+            .HasKey(p => new { p.OrderId, p.ProductId });
 
         modelBuilder.Entity<Category>()
             .HasIndex(c => c.Name);
@@ -84,8 +77,6 @@ using Microsoft.AspNetCore.Identity;
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Image> Pictures { get; set; } = null!;
-    public DbSet<Cart> Carts { get; set; } = null!;
-    public DbSet<CartProduct> CartProducts { get; set; } = null!;
-
-
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<OrderProduct> OrderProducts { get; set; } = null!;
 }
