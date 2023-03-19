@@ -10,15 +10,17 @@ public class UserService : IUserService
     private readonly UserManager<User> _userManager;
     private readonly IRoleService _roleservice;
     private readonly ITokenService _tokenService;
+    private readonly IOrderService _orderService;
 
-    public UserService(UserManager<User> userManager, IRoleService roleservice, ITokenService tokenService) 
+    public UserService(UserManager<User> userManager, IRoleService roleservice, ITokenService tokenService, IOrderService orderService) 
     {
         _userManager = userManager;
         _roleservice = roleservice;
         _tokenService = tokenService;
+        _orderService = orderService;
     }
 
-  public async Task<User?> SignUpAsync(UserSignUpDTO request)
+   public async Task<User?> SignUpAsync(UserSignUpDTO request)
     {
         var user = new User
         {
@@ -52,6 +54,7 @@ public class UserService : IUserService
         await _userManager.AddToRolesAsync(user, rolesarray);
         return user;
     }
+    
     public async Task<UserSignInResponseDTO?> SignInAsync(UserSignInDTO request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);

@@ -25,7 +25,7 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         _repo = repo;
     }
 
-    public async Task<TModel?> CreateAsync(TDto request)
+    public async virtual Task<TModel?> CreateAsync(TDto request)
     {
         Console.WriteLine($" ==========CrudServiceThe Cart request is {request}==============");
         var result =  await _repo.CreateAsync(request);

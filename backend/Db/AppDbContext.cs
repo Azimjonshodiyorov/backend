@@ -72,6 +72,13 @@ using Microsoft.AspNetCore.Identity;
             .AutoInclude();
 
         modelBuilder.AddIdentityConfig();
+
+        // modelBuilder.Entity<User>()
+        //     .HasOne(s => s.Orders)
+        //     .WithOne()
+        //     .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<User>().Navigation(s => s.Orders).AutoInclude();
     }
 
     public DbSet<Product> Products { get; set; } = null!;

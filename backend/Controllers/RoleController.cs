@@ -20,7 +20,6 @@ public class RoleController : ApiControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateRole([FromBody]string roleName)
     {
-        Console.WriteLine($"------------The role name in RoleController is {roleName}------------");
         var role = await _service.CreateRoleAsync(roleName);
         if(role is null)
         {
@@ -32,7 +31,6 @@ public class RoleController : ApiControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteRole([FromBody]string roleName)
     {
-        Console.WriteLine($"------------The role name in RoleController is {roleName}------------");
         return Ok(await _service.DeleteRoleAsync(roleName));
     }
 

@@ -57,7 +57,7 @@ public class ProductRepo : CrudRepo<Product, ProductDTO>, IProductRepo
 
   public async Task<ICollection<Product>> GetProductsByCategoryAsync(int categoryId)
   {
-       var query = _dbContext.Products.Where(p => true);
+        var query = _dbContext.Products.Where(p => true);
         query = query.Where(p => p.CategoryId == categoryId);
 
         return await query.OrderByDescending(c => c.CreatedAt).ToListAsync();

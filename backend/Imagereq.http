@@ -3,7 +3,7 @@ POST https://localhost:7656/users/Signup HTTP/1.1
 content-type : application/json"
 
 {
-    "firstName" : "Anu", "lastName" : "Siraj", "email" : "angu.srajencir@gmail.com", "password" : "Gr@y&At0m"
+    "firstName" : "Grreny", "lastName" : "Siraj", "email" : "greenu@gmail.com", "password" : "Gr@y&At0m"
 }
 
 ###

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCoreDemo.Db;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230317174050_UserOrderRelation")]
+    partial class UserOrderRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,19 +281,17 @@ namespace backend.Migrations
                         .HasColumnType("text")
                         .HasColumnName("order_name");
 
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("order_status");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_at");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
-                        .HasColumnName("user_id");
-
                     b.HasKey("Id")
                         .HasName("pk_orders");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_orders_user_id");
 
                     b.ToTable("orders", (string)null);
                 });
@@ -431,6 +432,10 @@ namespace backend.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("normalized_user_name");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("integer")
+                        .HasColumnName("order_id");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
@@ -465,6 +470,10 @@ namespace backend.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_users_order_id");
 
                     b.ToTable("users", (string)null);
                 });
@@ -536,18 +545,6 @@ namespace backend.Migrations
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("NetCoreDemo.Models.Order", b =>
-                {
-                    b.HasOne("NetCoreDemo.Models.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_orders_users_user_id");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("NetCoreDemo.Models.OrderProduct", b =>
                 {
                     b.HasOne("NetCoreDemo.Models.Order", "Order")
@@ -589,6 +586,17 @@ namespace backend.Migrations
                     b.Navigation("Images");
                 });
 
+            modelBuilder.Entity("NetCoreDemo.Models.User", b =>
+                {
+                    b.HasOne("NetCoreDemo.Models.Order", "Order")
+                        .WithOne()
+                        .HasForeignKey("NetCoreDemo.Models.User", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("fk_users_orders_order_id");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("NetCoreDemo.Models.Category", b =>
                 {
                     b.Navigation("Products");
@@ -602,11 +610,6 @@ namespace backend.Migrations
             modelBuilder.Entity("NetCoreDemo.Models.Product", b =>
                 {
                     b.Navigation("OrderLinks");
-                });
-
-            modelBuilder.Entity("NetCoreDemo.Models.User", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
