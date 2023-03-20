@@ -8,4 +8,5 @@ public interface IUserService
     Task<User?> SignUpAsync(UserSignUpDTO request);
     Task<UserSignInResponseDTO?> SignInAsync(UserSignInDTO request);
     Task<User?> FindByEmailAsync(string email);
+    Task<User> ChangePasswordAsync(string email, string currentPassword, string newPassword);
 }

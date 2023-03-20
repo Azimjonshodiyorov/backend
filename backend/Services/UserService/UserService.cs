@@ -4,6 +4,8 @@ using NetCoreDemo.DTOs;
 using NetCoreDemo.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
 
 public class UserService : IUserService
 {
@@ -78,6 +80,47 @@ public class UserService : IUserService
         {
             return null;
         }
+        return user;
+    }
+
+    public async Task<User> ChangePasswordAsync(string email, string currentPassword, string newPassword)
+    {
+        var user = await FindByEmailAsync(email);
+        if(user is null)
+        {
+            return null;
+        }
+        
+        // const int keySize = 64;
+        // const int iterations = 350000;
+
+        // HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+
+        // string HashPassword(string currentPassword, out byte[] salt)
+        // {
+        //     salt = RandomNumberGenerator.GetBytes(keySize);
+
+        //     var hash = Rfc2898DeriveBytes.Pbkdf2(
+        //         Encoding.UTF8.GetBytes(currentPassword),
+        //         salt,
+        //         iterations,
+        //         hashAlgorithm,
+        //         keySize);
+        //     return Convert.ToHexString(hash);
+        // }
+        
+        // var salt = RandomNumberGenerator.GetBytes(keySize);
+        // var hashedpassword = HashPassword(currentPassword, out salt);
+
+        // if(user.PasswordHash != hashedpassword)
+        // {
+        //    return null; 
+        // }
+        var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if(result is null)
+            {
+                return null;
+            }
         return user;
     }
 }

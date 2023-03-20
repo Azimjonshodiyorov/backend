@@ -54,4 +54,16 @@ public class UserController : ApiControllerBase
         }
         return Ok(response);
     }
+
+    [AllowAnonymous]
+    [HttpPost("change-password")]    
+    public async Task<IActionResult> ChangePassword(string email, string currentPassword, string newPassword)
+    {
+        var response = await _service.ChangePasswordAsync(email, currentPassword, newPassword);
+        if (response is null)
+        {
+            return BadRequest("Password update failed");
+        }
+        return Ok(response);
+    }
 }
