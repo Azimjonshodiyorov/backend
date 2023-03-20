@@ -74,17 +74,6 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
 
     }
 
-    public async Task<bool> RemoveAllProductAsync(int orderId)
-    {
-        var entity = await _repo.RemoveAllProductAsync(orderId);
-        if (false)
-        {
-            throw new Exception("Products cannot deleted");
-        }
-        return true;
-
-    }
-
     public async Task<int> UpdateProductsAsync(int id, ICollection<OrderAddProductsDTO> request)
     {
         

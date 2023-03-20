@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using System;
 
 public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
 {
@@ -85,32 +86,31 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
         return true;
     }
 
-    public async Task<bool> RemoveAllProductAsync(int orderId)
-    {
-        var item = _dbContext.OrderProducts
-            .FirstOrDefault(p => (p.OrderId == orderId));
-        if(item is null)
-        {
-            return false;
-        }
-        _dbContext.Set<OrderProduct>().Remove(item);
-        await _dbContext.SaveChangesAsync();
-        return true;
-    }
-
     public async Task<int> UpdateProductsAsync(int id, ICollection<OrderAddProductsDTO> products)
     {
-        var item = await GetAsync(id);
-        if(item is null)
+        var order = await GetAsync(id);
+        if(order is null)
         {
             return -1;
         }
-        var removeOldProducts = await RemoveAllProductAsync(id);
-        if(!removeOldProducts)
+        var query = _dbContext.OrderProducts.Where(c => true);
+
+        foreach( var items in products)
         {
-            return -1;
+            query = query.Where(c => c.OrderId == id && c.ProductId == items.ProductId);
+
+            if (query is not null)
+            {
+                await RemoveProductAsync(id, items.ProductId);
+            }
+            
         }
-        var updatedResult =  await AddProductsAsync(id, products);
-        return updatedResult;
+        var added = await AddProductsAsync(id, products);
+        if(added == 0)
+        {
+            return added;
+        }
+        await _dbContext.SaveChangesAsync();
+        return added;
     }
 }

@@ -48,18 +48,6 @@ public class OrderController : CrudController<Order, OrderDTO>
       return Ok("Product deleted from your order");
     }
 
-    [HttpDelete("{id}/delete-allproduct")]
-    public async Task<IActionResult> DeleteAllProductAsync(int id)
-    {
-        var added = await _orderService.RemoveAllProductAsync(id);
-        if (!added)
-        {
-            return BadRequest("Failed to delete");
-        }
-
-      return Ok("Products deleted from your order");
-    }
-
     [HttpPut("{id}/update-product")]
     public async Task<IActionResult> UpdateProducts(int id, ICollection<OrderAddProductsDTO> request)
     {
