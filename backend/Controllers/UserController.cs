@@ -40,4 +40,18 @@ public class UserController : ApiControllerBase
         }
         return Ok(response);
     }
+
+    [AllowAnonymous]
+    [HttpGet("email")]
+    public async Task<IActionResult?> FindByEmail(string email)
+    {
+        Console.WriteLine($"==========={email} =========");
+
+        var response = await _service.FindByEmailAsync(email);
+        if(response is null)
+        {
+            return BadRequest("No Valid User");
+        }
+        return Ok(response);
+    }
 }

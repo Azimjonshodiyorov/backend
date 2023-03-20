@@ -11,6 +11,7 @@ public class UserService : IUserService
     private readonly IRoleService _roleservice;
     private readonly ITokenService _tokenService;
     private readonly IOrderService _orderService;
+    protected ILookupNormalizer normalizer;
 
     public UserService(UserManager<User> userManager, IRoleService roleservice, ITokenService tokenService, IOrderService orderService) 
     {
@@ -67,5 +68,16 @@ public class UserService : IUserService
             return null;
         }
         return await _tokenService.GenerateTokenAsync(user);
+    }
+
+
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if(user is null)
+        {
+            return null;
+        }
+        return user;
     }
 }
