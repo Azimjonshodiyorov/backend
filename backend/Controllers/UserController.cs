@@ -62,7 +62,7 @@ public class UserController : ApiControllerBase
         var response = await _service.FindByEmailAsync(email);
         if(response is null)
         {
-            return BadRequest("No Valid User");
+            return BadRequest("Not Valid User");
         }
         return Ok(response);
     }
@@ -77,5 +77,17 @@ public class UserController : ApiControllerBase
             return BadRequest("Password update failed");
         }
         return Ok(response);
+    }
+
+    [AllowAnonymous]
+    [HttpDelete("{userId}")]    
+    public async Task<IActionResult> DeleteUser(string userId)
+    {
+        var response = await _service.DeleteAsync(userId);
+        if (!response)
+        {
+            return BadRequest("Not Valid User");
+        }
+        return Ok("Deleted user successfully");
     }
 }

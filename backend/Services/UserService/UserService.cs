@@ -132,4 +132,20 @@ public class UserService : IUserService
             }
         return user;
     }
+
+    public async Task<bool> DeleteAsync(string userId)
+    {
+        var foundUser = await FindByIdAsync(userId);
+        if(foundUser is null)
+        {
+            return false;
+        }
+        var deleteUser = await _userManager.DeleteAsync(foundUser);
+        if(deleteUser is null)
+        {
+            return false;
+        }
+        return true;
+
+    }
 }
