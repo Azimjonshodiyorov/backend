@@ -80,7 +80,7 @@ public class UserController : ApiControllerBase
     }
 
     [AllowAnonymous]
-    [HttpDelete("{userId}")]    
+    [HttpDelete("delete/{userId}")]    
     public async Task<IActionResult> DeleteUser(string userId)
     {
         var response = await _service.DeleteAsync(userId);
@@ -89,5 +89,16 @@ public class UserController : ApiControllerBase
             return BadRequest("Not Valid User");
         }
         return Ok("Deleted user successfully");
+    }
+    [AllowAnonymous]
+    [HttpGet("role")]    
+    public async Task<IActionResult> GetRole(string userId)
+    {
+        var response = await _service.GetRolesAsync(userId);
+        if (response is null)
+        {
+            return BadRequest("Not Valid User");
+        }
+        return Ok(response);
     }
 }

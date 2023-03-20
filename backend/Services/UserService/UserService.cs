@@ -148,4 +148,20 @@ public class UserService : IUserService
         return true;
 
     }
+
+    public async Task<ICollection<string>> GetRolesAsync(string userId)
+    {
+        var foundUser = await FindByIdAsync(userId);
+        if(foundUser is null)
+        {
+            return null;
+        }
+        var findRole = await _userManager.GetRolesAsync(foundUser);
+        if(findRole is null)
+        {
+            return null;
+        }
+        return findRole;
+    }
+
 }
