@@ -42,6 +42,18 @@ public class UserController : ApiControllerBase
     }
 
     [AllowAnonymous]
+    [HttpGet("{userId}")]
+    public async Task<IActionResult?> FindById(string userId)
+    {
+        var response = await _service.FindByIdAsync(userId);
+        if(response is null)
+        {
+            return BadRequest("No Valid User");
+        }
+        return Ok(response);
+    }
+
+    [AllowAnonymous]
     [HttpGet("email")]
     public async Task<IActionResult?> FindByEmail(string email)
     {

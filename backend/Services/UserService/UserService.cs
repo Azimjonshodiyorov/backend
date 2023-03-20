@@ -72,6 +72,15 @@ public class UserService : IUserService
         return await _tokenService.GenerateTokenAsync(user);
     }
 
+    public async Task<User?> FindByIdAsync(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if(user is null)
+        {
+            return null;
+        }
+        return user;
+    }
 
     public async Task<User?> FindByEmailAsync(string email)
     {
