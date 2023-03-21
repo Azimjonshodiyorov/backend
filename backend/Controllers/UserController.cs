@@ -50,7 +50,7 @@ public class UserController : ApiControllerBase
         {
             return BadRequest("No Valid User");
         }
-        return Ok(response);
+        return Ok(UserSignUpResponseDTO.FromUser((User)response));
     }
 
     [AllowAnonymous]
@@ -64,7 +64,7 @@ public class UserController : ApiControllerBase
         {
             return BadRequest("Not Valid User");
         }
-        return Ok(response);
+        return Ok(UserSignUpResponseDTO.FromUser((User)response));
     }
 
     [AllowAnonymous]
@@ -76,7 +76,7 @@ public class UserController : ApiControllerBase
         {
             return BadRequest("Password update failed");
         }
-        return Ok(response);
+        return Ok("Password updated successfully");
     }
 
     [AllowAnonymous]

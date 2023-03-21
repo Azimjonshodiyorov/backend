@@ -99,6 +99,16 @@ public class UserService : IUserService
         {
             return null;
         }
+        if(!await _userManager.CheckPasswordAsync(user,currentPassword ))
+        {
+            return null;
+        }
+        var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if(result is null)
+            {
+                return null;
+            }
+        return user;
         
         // const int keySize = 64;
         // const int iterations = 350000;
@@ -125,12 +135,6 @@ public class UserService : IUserService
         // {
         //    return null; 
         // }
-        var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
-            if(result is null)
-            {
-                return null;
-            }
-        return user;
     }
 
     public async Task<bool> DeleteAsync(string userId)

@@ -6,6 +6,8 @@ content-type : application/json"
     "firstName" : "Grreny", "lastName" : "Siraj", "email" : "greenu@gmail.com", "password" : "Gr@y&At0m"
 }
 
+Lr@y&At0l
+
 ###
 POST https://localhost:7656/users/signin HTTP/1.1
 content-type : application/json"
@@ -13,6 +15,8 @@ content-type : application/json"
 {
     "email" : "shu@gmail.com", "password" : "Gr@y&At0m"
 }
+
+
 
 ###
 POST https://localhost:7656/roles/add HTTP/1.1
@@ -28,9 +32,10 @@ content-type : application/json"
 # {
 #     "firstName" : "Anu", "lastName" : "Siraj", "email" : "anu.sraj@gmail.com", "password" : "Gr@y&At0m"
 # }
+###
+GET https://localhost:7656/users/?email=greenu@gmail.com
 
-
-# ###
+###
 POST https://localhost:7656/images HTTP/1.1
 content-type : application/json"
 
