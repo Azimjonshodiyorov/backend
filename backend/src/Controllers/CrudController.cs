@@ -4,7 +4,6 @@ using NetCoreDemo.DTOs;
 using NetCoreDemo.Models;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
-using NetCoreDemo.Common;
 using Microsoft.AspNetCore.Authorization;
 
 public class CrudController<TModel, TDto> : ApiControllerBase
@@ -46,9 +45,9 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     }
 
     [HttpGet]
-    public virtual async Task<ActionResult<IEnumerable<TModel>>> GetAll()
+    public virtual async Task<ActionResult<IEnumerable<TModel>>> GetAll(int page, int itemsperpage)
     {
-        return Ok(await _service.GetAllAsync(null));
+        return Ok(await _service.GetAllAsync(page, itemsperpage));
     }
 }
 

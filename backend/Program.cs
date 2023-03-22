@@ -29,7 +29,6 @@ internal class Program
                 });
             });
 
-// Add services to the container.
 
 builder.Services
     .AddControllers()
@@ -77,12 +76,10 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-// builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICrudRepo<Image, ImageDTO>, CrudRepo<Image,ImageDTO>>();
 builder.Services.AddScoped<IProductRepo, ProductRepo>().AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>().AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IImageRepo, ImageRepo>().AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>().AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
@@ -96,7 +93,6 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -106,7 +102,7 @@ if (app.Environment.IsDevelopment())
     {
         var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
         var config = scope.ServiceProvider.GetService<IConfiguration>();
-            if (dbContext is not null && config.GetValue<bool>("CreateDbAtStart", false)) //later change this and on dev.json file to true
+            if (dbContext is not null && config.GetValue<bool>("CreateDbAtStart", false))
         {
             dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();

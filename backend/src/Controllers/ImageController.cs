@@ -6,7 +6,9 @@ using NetCoreDemo.Services;
 
 public class ImageController : CrudController<Image, ImageDTO>
 {
-  public ImageController(ICrudService<Image, ImageDTO> service) : base(service)
-  {
-  }
+    private readonly IImageService _imageService;
+    public ImageController(IImageService service) : base(service)
+    {
+              _imageService = service;
+    }
 }

@@ -46,17 +46,17 @@ public class CrudRepo<TModel,TDto> : ICrudRepo<TModel, TDto>
         return true;
     }
 
-    public virtual async Task<ICollection<TModel>> GetAllAsync(PaginationParams @params)
+    public virtual async Task<ICollection<TModel>> GetAllAsync(int page, int itemsperpage)
     {
-        if(@params is null)
+        if(page > 0 && itemsperpage > 0)
         {
-            return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
-        }
-        return await _dbContext.Set<TModel>().AsNoTracking()
+            return await _dbContext.Set<TModel>().AsNoTracking()
                         .OrderBy(p => p.Id)
-                        .Skip((@params.Page - 1) * @params.ItemsPerPage)
-                        .Take(@params.ItemsPerPage)
+                        .Skip((page - 1) * itemsperpage)
+                        .Take(itemsperpage)
                         .ToListAsync();
+        }
+        return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();   
     }
     
     public async Task<TModel?> UpdateAsync(int id, TDto request)

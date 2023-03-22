@@ -4,7 +4,6 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
-using NetCoreDemo.Common;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 
@@ -16,14 +15,6 @@ public class ProductController : CrudController<Product, ProductDTO>
     public ProductController(IProductService service) : base(service)
     {
         _productService = service;
-    }
-
-    [AllowAnonymous]
-    [HttpGet]
-    public override async Task<ActionResult<IEnumerable<Product>>> GetAll()
-    {
-        var @params = Request.QueryString.ParseParams<PaginationParams>();
-        return Ok(await _productService.GetAllAsync(@params));
     }
 
     [AllowAnonymous]
@@ -48,6 +39,6 @@ public class ProductController : CrudController<Product, ProductDTO>
         {
             return Ok(await _productService.GetProductsByCategoryAsync((int)categoryId));
         }
-        return Ok(await base.GetAll());
+        return Ok(await base.GetAll(1,10));
     }
 }

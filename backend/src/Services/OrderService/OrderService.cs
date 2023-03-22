@@ -50,8 +50,6 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
         return entity;
     }
 
-
-
     public async Task<int> AddProductsAsync(int id, ICollection<OrderAddProductsDTO> request)
     {
         
@@ -72,7 +70,6 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
             throw ServiceException.BadRequest("Product cannot deleted");
         }
         return true;
-
     }
 
     public async Task<int> UpdateProductsAsync(int id, ICollection<OrderAddProductsDTO> request)

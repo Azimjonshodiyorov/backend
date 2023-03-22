@@ -56,9 +56,9 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         throw ServiceException.BadRequest();
     }
 
-    public virtual async Task<IEnumerable<TModel>> GetAllAsync(PaginationParams @params)
+    public virtual async Task<IEnumerable<TModel>> GetAllAsync(int page, int itemsperpage)
     {
-        var entity = await _repo.GetAllAsync(@params);
+        var entity = await _repo.GetAllAsync(page, itemsperpage);
         if(entity is null)
         {
             throw ServiceException.NotFound("Products not found");

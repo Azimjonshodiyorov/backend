@@ -25,9 +25,9 @@ public class CategoryService : CrudService<Category, CategoryDTO>, ICategoryServ
         return entity;
     }
 
-    public async override Task<IEnumerable<Category>> GetAllAsync(PaginationParams @params)
+    public async override Task<IEnumerable<Category>> GetAllAsync(int page, int itemsperpage)
     {
-        var entity = await _repo.GetAllAsync(@params);
+        var entity = await _repo.GetAllAsync(page, itemsperpage);
         if (entity is null)
         {
             throw ServiceException.NotFound("Category not found");

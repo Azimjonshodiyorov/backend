@@ -4,7 +4,6 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
-using NetCoreDemo.Common;
 
 public class OrderController : CrudController<Order, OrderDTO>
 {

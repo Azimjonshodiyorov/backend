@@ -11,18 +11,18 @@ public class CategoryRepo : CrudRepo<Category, CategoryDTO>, ICategoryRepo
     {
     }
 
-    public async override Task<ICollection<Category>> GetAllAsync(PaginationParams @params)
+    public async override Task<ICollection<Category>> GetAllAsync(int page, int itemsperpage)
     {
-      if (@params is null)
+      if(page > 0 && itemsperpage > 0)
       {
-        return await _dbContext.Set<Category>().AsNoTracking().ToListAsync();
-      }
-      return await _dbContext.Categories.AsNoTracking()
+        return await _dbContext.Categories.AsNoTracking()
                       .OrderBy(c => c.Id)
                       .Include(i => i.Images)
-                      .Skip((@params.Page - 1) * @params.ItemsPerPage)
-                      .Take(@params.ItemsPerPage)
+                      .Skip((page - 1) * itemsperpage)
+                      .Take(itemsperpage)
                       .ToListAsync();
+      }
+      return await _dbContext.Set<Category>().AsNoTracking().ToListAsync();
     }
 
     public async override Task<Category?> GetAsync(int id)

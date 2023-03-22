@@ -4,7 +4,6 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
-using NetCoreDemo.Common;
 using Microsoft.AspNetCore.Authorization;
 
 // [Authorize(Roles = "Admin")]
@@ -15,14 +14,6 @@ public class CategoryController : CrudController<Category, CategoryDTO>
     public CategoryController(ICategoryService service) : base(service)
     {
           _categoryService = service;
-    }
-
-    [HttpGet]
-    public override async Task<ActionResult<IEnumerable<Category>>> GetAll()
-    {
-          var @params = Request.QueryString.ParseParams<PaginationParams>();
-          return Ok(await _categoryService.GetAllAsync(@params));
-          
     }
 
     [HttpGet("{id}/products")]
