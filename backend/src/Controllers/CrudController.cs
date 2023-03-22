@@ -6,6 +6,7 @@ using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = "Admin")]
 public class CrudController<TModel, TDto> : ApiControllerBase
     where TModel : BaseModel, new()
     where TDto : BaseDTO<TModel>
@@ -44,6 +45,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
         return Ok(await _service.DeleteAsync(id));
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public virtual async Task<ActionResult<IEnumerable<TModel>>> GetAll(int page, int itemsperpage)
     {

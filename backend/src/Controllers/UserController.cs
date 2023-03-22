@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Authorization;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class UserController : ApiControllerBase
 {
     private readonly IUserService _service;
@@ -73,7 +73,6 @@ public class UserController : ApiControllerBase
         return Ok(response);
     }
 
-    [AllowAnonymous]
     [HttpGet("all")]    
     public async Task<IActionResult> GetAll()
     {

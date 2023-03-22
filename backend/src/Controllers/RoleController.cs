@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = "Admin")]
 public class RoleController : ApiControllerBase
 {
     private readonly IRoleService _service;

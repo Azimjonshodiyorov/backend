@@ -6,7 +6,7 @@ using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-// [Authorize(Roles = "Admin")]
+
 [Route("Categories")]
 public class CategoryController : CrudController<Category, CategoryDTO>
 {
@@ -16,6 +16,7 @@ public class CategoryController : CrudController<Category, CategoryDTO>
           _categoryService = service;
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}/products")]
     public async Task<IEnumerable<Product>> GetProducts(int id)
     {

@@ -4,6 +4,7 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 public class OrderController : CrudController<Order, OrderDTO>
 {
@@ -13,6 +14,7 @@ public class OrderController : CrudController<Order, OrderDTO>
           _orderService = service;
     }
 
+    [AllowAnonymous]
     [HttpGet("username")]
     public async Task<IActionResult> GetOrderByUsername(string userName)
     {
@@ -20,18 +22,21 @@ public class OrderController : CrudController<Order, OrderDTO>
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [HttpPost("{id}/add-products")]
     public async Task<IActionResult> AddProducts(int id, ICollection<OrderAddProductsDTO> request)
     {
         return Ok(await _orderService.AddProductsAsync(id, request));
     }
 
+    [AllowAnonymous]
     [HttpDelete("{id}/delete-product")]
     public async Task<IActionResult> DeleteProductAsync(int id, int productId)
     {
         return Ok(await _orderService.RemoveProductAsync(id, productId));
     }
 
+    [AllowAnonymous]
     [HttpPut("{id}/update-product")]
     public async Task<IActionResult> UpdateProducts(int id, ICollection<OrderAddProductsDTO> request)
     {
