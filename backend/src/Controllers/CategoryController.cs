@@ -1,0 +1,33 @@
+namespace NetCoreDemo.Controllers;
+
+using NetCoreDemo.Models;
+using NetCoreDemo.DTOs;
+using NetCoreDemo.Services;
+using Microsoft.AspNetCore.Mvc;
+using NetCoreDemo.Common;
+using Microsoft.AspNetCore.Authorization;
+
+// [Authorize(Roles = "Admin")]
+[Route("Categories")]
+public class CategoryController : CrudController<Category, CategoryDTO>
+{
+    private readonly ICategoryService _categoryService;
+    public CategoryController(ICategoryService service) : base(service)
+    {
+          _categoryService = service;
+    }
+
+    [HttpGet]
+    public override async Task<ActionResult<IEnumerable<Category>>> GetAll()
+    {
+          var @params = Request.QueryString.ParseParams<PaginationParams>();
+          return Ok(await _categoryService.GetAllAsync(@params));
+          
+    }
+
+    [HttpGet("{id}/products")]
+    public async Task<IEnumerable<Product>> GetProducts(int id)
+    {
+      return await _categoryService.GetProductsByCategoryAsync(id);
+    }
+}

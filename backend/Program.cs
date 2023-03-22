@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using NetCoreDemo.Middlewares;
 
 internal class Program
 {
@@ -87,6 +88,9 @@ builder.Services.AddScoped<IOrderRepo, OrderRepo>().AddScoped<IOrderService, Ord
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ITokenService, JwtTokenService>();
 
+builder.Services.AddTransient<ErrorHandlerMiddleware>();
+
+
 
 var app = builder.Build();
 
@@ -110,7 +114,7 @@ if (app.Environment.IsDevelopment())
     }
 }
 
-    
+    app.UseMiddleware<ErrorHandlerMiddleware>();
 
     app.UseAuthentication();
 
