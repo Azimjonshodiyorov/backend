@@ -1,6 +1,5 @@
 namespace NetCoreDemo.Models;
 
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 public class Role : IdentityUser<int>

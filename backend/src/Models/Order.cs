@@ -1,7 +1,5 @@
 namespace NetCoreDemo.Models;
 
-using System.ComponentModel.DataAnnotations;
-
 public class Order : BaseModel
 {
     public string OrderName { get; set; } = null!;

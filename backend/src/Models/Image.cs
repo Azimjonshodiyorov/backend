@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace NetCoreDemo.Models;
 
 public class Image : BaseModel

@@ -1,15 +1,11 @@
-using System;
 using NetCoreDemo.Services;
 using System.Text.Json.Serialization;
 using NetCoreDemo.Models;
-using NetCoreDemo.DTOs;
 using NetCoreDemo.Db;
 using NetCoreDemo.Repositories;
-using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using NetCoreDemo.Middlewares;
 using Microsoft.OpenApi.Models;
@@ -53,6 +49,8 @@ internal class Program
             options.Password.RequiredLength = 6;
             options.Password.RequireDigit = false;
             options.Password.RequireLowercase = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
         })
         .AddEntityFrameworkStores<AppDbContext>();
 

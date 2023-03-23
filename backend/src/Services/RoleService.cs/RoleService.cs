@@ -1,9 +1,7 @@
 namespace NetCoreDemo.Services;
 
-using NetCoreDemo.DTOs;
 using NetCoreDemo.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using NetCoreDemo.Helpers;
 
 public class RoleService : IRoleService
@@ -19,16 +17,14 @@ public class RoleService : IRoleService
 
     public async Task<string> CreateRoleAsync(string roleName)
     {
-        if (await _roleManager.FindByNameAsync((string)roleName) is not null)
+        if (await _roleManager.FindByNameAsync((string)roleName) is null)
         {
-            throw new Exception($"{roleName} role already exist");
-            
-        }
-        var createRole = await _roleManager.CreateAsync(new IdentityRole<int>{
+            var createRole = await _roleManager.CreateAsync(new IdentityRole<int>{
 
                 Name = roleName
 
             });
+        }
         return roleName;
     }
 

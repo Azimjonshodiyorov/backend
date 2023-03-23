@@ -4,8 +4,6 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Db;
 using NetCoreDemo.Repositories;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using NetCoreDemo.Helpers;
 
 public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>

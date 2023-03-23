@@ -3,9 +3,6 @@ namespace NetCoreDemo.Services;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using NetCoreDemo.Helpers;
 
@@ -112,32 +109,6 @@ public class UserService : IUserService
             throw ServiceException.BadRequest("Password cannot change");
         }
         return user;
-        
-        // const int keySize = 64;
-        // const int iterations = 350000;
-
-        // HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
-
-        // string HashPassword(string currentPassword, out byte[] salt)
-        // {
-        //     salt = RandomNumberGenerator.GetBytes(keySize);
-
-        //     var hash = Rfc2898DeriveBytes.Pbkdf2(
-        //         Encoding.UTF8.GetBytes(currentPassword),
-        //         salt,
-        //         iterations,
-        //         hashAlgorithm,
-        //         keySize);
-        //     return Convert.ToHexString(hash);
-        // }
-        
-        // var salt = RandomNumberGenerator.GetBytes(keySize);
-        // var hashedpassword = HashPassword(currentPassword, out salt);
-
-        // if(user.PasswordHash != hashedpassword)
-        // {
-        //    return null; 
-        // }
     }
 
     public async Task<bool> DeleteAsync(string userId)

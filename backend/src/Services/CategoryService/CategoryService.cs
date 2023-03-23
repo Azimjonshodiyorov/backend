@@ -3,7 +3,6 @@ namespace NetCoreDemo.Services;
 using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Db;
-using Microsoft.EntityFrameworkCore;
 using NetCoreDemo.Repositories;
 using NetCoreDemo.Helpers;
 

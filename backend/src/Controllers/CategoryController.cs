@@ -6,7 +6,6 @@ using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-
 [Route("api/v1/Categories")]
 public class CategoryController : CrudController<Category, CategoryDTO>
 {

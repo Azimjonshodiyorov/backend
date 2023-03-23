@@ -1,6 +1,5 @@
 namespace NetCoreDemo.Db;
 
-using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using NetCoreDemo.Models;

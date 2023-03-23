@@ -2,7 +2,6 @@ namespace NetCoreDemo.Services;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using NetCoreDemo.Db;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Helpers;

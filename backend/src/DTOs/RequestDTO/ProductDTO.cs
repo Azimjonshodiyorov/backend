@@ -6,17 +6,17 @@ using NetCoreDemo.Models;
 public class ProductDTO : BaseDTO<Product>
 {
     [Required]
-    [MaxLength(60, ErrorMessage = "Name exceeds letters")]
-    [MinLength(3, ErrorMessage = "Name requires atleast 3 letter")]
+    [MaxLength(60, ErrorMessage = "Name exceeds characters")]
+    [MinLength(3, ErrorMessage = "Name requires atleast 3 characters")]
     public string Name { get; set; } = null!;
 
     [Required]
     [Range(0, int.MaxValue, ErrorMessage = "Price should be greater than 0")]
-    public double Price {get; set; }
+    public double Price { get; set; }
 
     [Required]
-    [MinLength(10, ErrorMessage = "Requires atleast 3 letters")]
-    public  string Description { get; set; } = null!;
+    [MinLength(10, ErrorMessage = "Requires atleast 3 characters")]
+    public string Description { get; set; } = null!;
 
     [Required]
     public int CategoryId { get; set; }
@@ -24,7 +24,7 @@ public class ProductDTO : BaseDTO<Product>
     [Required]
     public ImageDTO Images { get; set; } = null!;
 
-  public override void UpdateModel(Product model)
+    public override void UpdateModel(Product model)
     {
         model.Name = Name;
         model.Price = Price;

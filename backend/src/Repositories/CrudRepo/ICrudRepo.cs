@@ -1,8 +1,5 @@
 namespace NetCoreDemo.Repositories;
 
-using NetCoreDemo.Models;
-using NetCoreDemo.DTOs;
-
 public interface ICrudRepo<TModel, TDto>
 {
     Task<TModel?> CreateAsync(TDto request);

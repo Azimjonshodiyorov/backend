@@ -6,12 +6,27 @@ using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
+[Authorize(Roles = "Admin")]
 public class OrderController : CrudController<Order, OrderDTO>
 {
     private readonly IOrderService _orderService;
     public OrderController(IOrderService service) : base(service)
     {
           _orderService = service;
+    }
+
+    [HttpGet]
+    public override async Task<ActionResult<IEnumerable<Order>>> GetAll(int page, int itemsperpage)
+    {
+        return Ok(await _service.GetAllAsync(page, itemsperpage));
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
+    public override async Task<IActionResult> Create(OrderDTO request)
+    {
+        var item = await _service.CreateAsync(request);
+        return Ok(item);
     }
 
     [AllowAnonymous]
@@ -30,7 +45,7 @@ public class OrderController : CrudController<Order, OrderDTO>
     }
 
     [AllowAnonymous]
-    [HttpDelete("{id}/delete-product")]
+    [HttpDelete("{id}/remove-product")]
     public async Task<IActionResult> DeleteProductAsync(int id, int productId)
     {
         return Ok(await _orderService.RemoveProductAsync(id, productId));

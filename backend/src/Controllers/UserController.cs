@@ -4,7 +4,6 @@ using NetCoreDemo.Services;
 using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using Microsoft.AspNetCore.Authorization;
 
 [Authorize(Roles = "Admin")]

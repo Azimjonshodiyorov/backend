@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 public class CategoryDTO : BaseDTO<Category>
 {
     [Required]
-    [MaxLength(25, ErrorMessage = "Name exceeds letters")]
-    [MinLength(3, ErrorMessage = "Name requires atleast 3 letter")]
+    [MaxLength(25, ErrorMessage = "Name exceeds characters")]
+    [MinLength(3, ErrorMessage = "Name requires atleast 3 characters")]
     public string Name { get; set; } = null!;
 
     [Required]

@@ -4,7 +4,6 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 
 public class ProductController : CrudController<Product, ProductDTO>

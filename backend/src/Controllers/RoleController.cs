@@ -1,12 +1,7 @@
 namespace NetCoreDemo.Controllers;
 
 using NetCoreDemo.Services;
-using NetCoreDemo.Models;
-using NetCoreDemo.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 
 [Authorize(Roles = "Admin")]
