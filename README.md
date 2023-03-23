@@ -37,6 +37,69 @@ Tech stack for Backe-end
     * Microsoft.IdentityModel.Tokens
     * System.IdentityModel.Tokens.Jwt
 
+
+## Endpoints
+Includes authentication and authorization, marked endpoints are only available for ADMIN.
+
+1. Products
+- GET api/vi/products/filter?
+    - api/vi/products/filter?name={name}
+    - api/vi/products/filter?price={price}
+    - api/vi/products/filter?keyword={keyword}
+    - api/vi/products/filter?pricemax={pricemax}&pricemin={pricemin}
+    - api/vi/products/filter?categoryId={id}
+
+- POST api/v1/products - FOR ADMIN ONLY
+- GET  api/v1/products
+- GET  api/v1/products?page={pageno}&itemsperpage={itemsperpage}
+- GET  api/v1/products/{id}
+- PUT  api/v1/products/{id} - FOR ADMIN ONLY
+- DELETE api/v1/products/{id} - FOR ADMIN ONLY
+
+2. Category
+- GET  api/v1/categories
+- GET  api/v1/categories?page={pageno}&itemsperpage={itemsperpage}
+- GET  api/v1/categories/{id}
+- POST api/v1/categories - FOR ADMIN ONLY
+- GET  api/v1/categories/{id}/products
+- PUT  api/v1/categories/{id} - FOR ADMIN ONLY
+- DELETE  api/v1/categories/{id} - FOR ADMIN ONLY
+
+3. Image
+- GET  api/v1/images
+- GET  api/v1/images?page={pageno}&itemsperpage={itemsperpage}
+- GET  api/v1/images/{id}
+- POST api/v1/images - FOR ADMIN ONLY
+- PUT  api/v1/images/{id} - FOR ADMIN ONLY
+- DELETE  api/v1/images/{id} - FOR ADMIN ONLY
+
+4. Order
+- GET  api/v1/orders
+- GET  api/v1/orders?page={pageno}&itemsperpage={itemsperpage}
+- GET  api/v1/orders/{id}
+- POST  api/v1/orders/{id}/add-products
+- DELETE  api/v1/orders/{id}/remove-product
+- PUT  api/v1/orders/{id}/update-product
+- POST api/v1/orders
+- GET  api/v1/orders/username
+- PUT  api/v1/orders/{id} - FOR ADMIN ONLY
+- DELETE  api/v1/orders/{id} - FOR ADMIN ONLY
+
+5. Role
+- POST  api/v1/roles - FOR ADMIN ONLY
+- DELETE  api/v1/roles - FOR ADMIN ONLY
+
+6. User
+- POST api/v1/users/signup
+- POST api/v1/users/signin
+- GET api/v1/users/{userid}
+- GET api/v1/users/email
+- POST api/v1/users/change-password
+- DELETE api/v1/users/delete/{userid}
+- GET api/v1/users/role
+- GET api/v1/users/all - FOR ADMIN ONLY
+
+
 ## Project Structure
 
 ```bash
@@ -253,6 +316,10 @@ Tech stack for Backe-end
             ├── IUserService.cs
             └── UserService.cs
 ```
+
+### Entity Relationship Diagram
+
+![App Screenshot](https://i.ibb.co/Cb8BFzY/backend-ERD.png)
 
 ## Step for running the project
 
