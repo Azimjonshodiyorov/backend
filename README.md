@@ -1,4 +1,4 @@
-# FullStack Project
+# FullStack for E-Commerce Project
 
 This project contains both Front-end and Back-end.
 
@@ -9,6 +9,8 @@ Tech stack used for Front-end
 - Material UI
 - SASS
 - HTML
+
+frontend deploy link: https://fs13-frontend-project-1lpu.vercel.app/
 
 Tech stack used for Back-end
 - ASP .NET Core
@@ -320,7 +322,7 @@ Includes authentication and authorization, marked endpoints are only available f
 ```
 
 
-### Entity Relationship Diagram
+## Entity Relationship Diagram
 
 ![App Screenshot](https://i.ibb.co/Cb8BFzY/backend-ERD.png)
 
