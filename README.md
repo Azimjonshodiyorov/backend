@@ -104,6 +104,17 @@ Includes authentication and authorization, marked endpoints are only available f
 
 
 
+## Features planning to develop
+
+1. Endpoint for forgot password
+2. Endpoint for reviews
+3. Endpoint for wish list
+4. Endpoint for customers address
+5. Endpoint for checkout
+6. Endpoint for tracking status of orders
+
+
+
 ## Project Structure
 
 ```bash
