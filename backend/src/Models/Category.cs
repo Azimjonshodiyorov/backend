@@ -1,5 +1,7 @@
 namespace NetCoreDemo.Models;
 
+using System.ComponentModel.DataAnnotations;
+
 public class Category : BaseModel
 {
     public string Name { get; set; } = null!;

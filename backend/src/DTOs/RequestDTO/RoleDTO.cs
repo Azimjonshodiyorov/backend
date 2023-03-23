@@ -5,11 +5,11 @@ namespace NetCoreDemo.Models;
 
 public class RoleDTO 
 {
-    [MaxLength(256)]
+    [StringLength(15, MinimumLength = 1)]
     public string RoleName { get; set; } = null!;
 
-  public static implicit operator string(RoleDTO v)
-  {
-    throw new NotImplementedException();
-  }
+    public static implicit operator string(RoleDTO v)
+    {
+      throw new NotImplementedException();
+    }
 }

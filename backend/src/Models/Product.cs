@@ -1,5 +1,6 @@
 namespace NetCoreDemo.Models;
 
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 public class Product : BaseModel

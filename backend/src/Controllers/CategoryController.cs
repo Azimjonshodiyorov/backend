@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 
-[Route("Categories")]
+[Route("api/v1/Categories")]
 public class CategoryController : CrudController<Category, CategoryDTO>
 {
     private readonly ICategoryService _categoryService;

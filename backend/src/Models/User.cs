@@ -1,8 +1,8 @@
+namespace NetCoreDemo.Models;
+
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
-
-namespace NetCoreDemo.Models;
 
 public class User : IdentityUser<int>
 {

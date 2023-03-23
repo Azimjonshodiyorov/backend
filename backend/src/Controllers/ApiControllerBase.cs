@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Produces(MediaTypeNames.Application.Json)]
 [Consumes(MediaTypeNames.Application.Json)]
-[Route("[controller]s")]
+[Route("api/v1/[controller]s")]
 public abstract class ApiControllerBase : ControllerBase
 {
-}
+}   

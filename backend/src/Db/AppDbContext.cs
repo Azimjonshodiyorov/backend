@@ -63,7 +63,7 @@ using Microsoft.AspNetCore.Identity;
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         modelBuilder.Entity<Product>()
-            .HasOne(p => p.Images)
+            .HasOne(a => a.Images)
             .WithOne()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -73,7 +73,9 @@ using Microsoft.AspNetCore.Identity;
 
         modelBuilder.AddIdentityConfig();
 
-        modelBuilder.Entity<User>().Navigation(s => s.Orders).AutoInclude();
+        modelBuilder.Entity<User>()
+            .Navigation(s => s.Orders)
+            .AutoInclude();
     }
 
     public DbSet<Product> Products { get; set; } = null!;
