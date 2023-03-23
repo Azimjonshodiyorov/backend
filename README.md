@@ -2,7 +2,7 @@
 
 This project contains both Front-end and Back-end.
 
-Tech stack for Front-end
+Tech stack used for Front-end
 - React
 - Redux
 - Typescript
@@ -10,7 +10,7 @@ Tech stack for Front-end
 - SASS
 - HTML
 
-Tech stack for Backe-end
+Tech stack used for Back-end
 - ASP .NET Core
 - Entity Framework Core
 - PostgreSQL
@@ -36,6 +36,7 @@ Tech stack for Backe-end
     * Microsoft.AspNetCore.Identity.EntityFrameworkCore
     * Microsoft.IdentityModel.Tokens
     * System.IdentityModel.Tokens.Jwt
+
 
 
 ## Endpoints
@@ -98,6 +99,7 @@ Includes authentication and authorization, marked endpoints are only available f
 - DELETE api/v1/users/delete/{userid}
 - GET api/v1/users/role
 - GET api/v1/users/all - FOR ADMIN ONLY
+
 
 
 ## Project Structure
@@ -317,9 +319,11 @@ Includes authentication and authorization, marked endpoints are only available f
             └── UserService.cs
 ```
 
+
 ### Entity Relationship Diagram
 
 ![App Screenshot](https://i.ibb.co/Cb8BFzY/backend-ERD.png)
+
 
 ## Step for running the project
 
