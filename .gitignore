@@ -3,6 +3,8 @@
 # User-specific files
 backend/appsettings.json
 backend/appsettings.*.json
+backend/appsettings.Development.json
+backend/appsettings.Production.json
 backend/obj
 backend/bin
 backend/Migrations
