@@ -16,9 +16,9 @@ public class ProductService : CrudService<Product, ProductDTO>, IProductService
       _repo = repo;
     }
 
-    public async override Task<Product?> GetAsync(int id)
+    public async override Task<Product?> GetByIdAsync(int id)
     {
-        var entity = await _repo.GetAsync(id);
+        var entity = await _repo.GetByIdAsync(id);
         if (entity is null)
         {
             throw ServiceException.NotFound("No product in this id");
@@ -26,9 +26,9 @@ public class ProductService : CrudService<Product, ProductDTO>, IProductService
         return entity;
     }
 
-  public async Task<ICollection<Product>> GetByNameAsync(string name, string keyword)
+    public async Task<ICollection<Product>> GetByNameAsync(string name)
     {
-        var entity = await _repo.GetByNameAsync(name,keyword);
+        var entity = await _repo.GetByNameAsync(name);
         if (entity.Count == 0)
         {
             throw ServiceException.NotFound("Product not found");

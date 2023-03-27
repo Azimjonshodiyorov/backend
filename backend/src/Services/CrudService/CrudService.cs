@@ -35,9 +35,9 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
         return result;
     }
 
-    public async virtual Task<TModel?> GetAsync(int id)
+    public async virtual Task<TModel?> GetByIdAsync(int id)
     {
-        var entity = await _repo.GetAsync(id);
+        var entity = await _repo.GetByIdAsync(id);
         if (entity is null)
         {
             throw ServiceException.NotFound("No item in this id");
@@ -66,7 +66,7 @@ public class CrudService<TModel, TDto> : ICrudService<TModel, TDto>
     
     public async Task<TModel?> UpdateAsync(int id, TDto update)
     {
-        var entity = await _repo.GetAsync(id);
+        var entity = await _repo.GetByIdAsync(id);
         if(entity is null)
         {
             throw ServiceException.BadRequest("Item cannot update");

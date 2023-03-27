@@ -2,6 +2,7 @@ namespace NetCoreDemo.Services;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using NetCoreDemo.Db;
 using NetCoreDemo.DTOs;
 using NetCoreDemo.Helpers;
@@ -17,17 +18,6 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
         _repo = repo;
     }
 
-    public async Task<Order?> CreateAsync(OrderDTO request)
-    {
-        var result =  await _repo.CreateAsync(request);
-
-        if(result is null)
-        {
-            throw ServiceException.BadRequest("Cannot create Order");
-        }
-        return result;
-    }
-
     public async Task<Order> GetOrderByUsernameAsync(string userName)
     {
         var result =  await _repo.GetOrderByUsernameAsync(userName);
@@ -39,9 +29,9 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
         return result;
     }
 
-    public override async Task<Order?> GetAsync(int id)
+    public override async Task<Order?> GetByIdAsync(int id)
     {
-        var entity = await _repo.GetAsync(id);
+        var entity = await _repo.GetByIdAsync(id);
         if (entity is null)
         {
             throw ServiceException.BadRequest("No order in this id");

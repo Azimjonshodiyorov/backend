@@ -13,9 +13,9 @@ public class ProductRepo : CrudRepo<Product, ProductDTO>, IProductRepo
     {
     }
 
-  public async override Task<Product?> GetAsync(int id)
+  public async override Task<Product?> GetByIdAsync(int id)
     {
-        var product = await base.GetAsync(id);
+        var product = await base.GetByIdAsync(id);
         if (product is null)
         {
           return null;
@@ -24,17 +24,13 @@ public class ProductRepo : CrudRepo<Product, ProductDTO>, IProductRepo
         return product;
     }
 
-    public async Task<ICollection<Product>> GetByNameAsync(string name, string keyword)
+    public async Task<ICollection<Product>> GetByNameAsync(string name)
     {
         var query = _dbContext.Products.Where(c => true);
 
-        if (name is not null)
+        if (name is not null && !string.IsNullOrEmpty(name))
         {
-          query = query.Where(c => c.Name.ToLower() == name.ToLower());
-        }
-        if (keyword is not null && !string.IsNullOrEmpty(keyword))
-        {
-          query = query.Where(c => c.Name.ToLower().Contains(keyword.ToLower()));
+          query = query.Where(c => c.Name.ToLower().Contains(name.ToLower()));
         }
         return await query.OrderByDescending(c => c.CreatedAt).Include(p => p.Category).ToListAsync();
     }

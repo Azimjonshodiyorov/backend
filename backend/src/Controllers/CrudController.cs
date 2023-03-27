@@ -30,7 +30,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TModel?>> Get(int id)
     {
-        return Ok(await _service.GetAsync(id));
+        return Ok(await _service.GetByIdAsync(id));
     }
 
     [HttpPut("{id}")]

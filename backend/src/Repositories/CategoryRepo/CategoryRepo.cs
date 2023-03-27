@@ -25,9 +25,9 @@ public class CategoryRepo : CrudRepo<Category, CategoryDTO>, ICategoryRepo
         return await _dbContext.Set<Category>().AsNoTracking().ToListAsync();
     }
 
-    public async override Task<Category?> GetAsync(int id)
+    public async override Task<Category?> GetByIdAsync(int id)
     {
-        var category = await base.GetAsync(id);
+        var category = await base.GetByIdAsync(id);
         if(category is null) 
         {
             return null;
@@ -40,7 +40,7 @@ public class CategoryRepo : CrudRepo<Category, CategoryDTO>, ICategoryRepo
 
     public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int id)
     {
-        var category = await base.GetAsync(id);
+        var category = await base.GetByIdAsync(id);
         if(category is null) 
         {
            return null;

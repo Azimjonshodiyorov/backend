@@ -17,11 +17,11 @@ public class ProductController : CrudController<Product, ProductDTO>
 
     [AllowAnonymous]
     [HttpGet("filter")]
-    public async Task<ActionResult<IEnumerable<Product>>> GetByFiltering(string? name, string? keyword, double? price, double? price_max, double? price_min, int? categoryId)
+    public async Task<ActionResult<IEnumerable<Product>>> GetByFiltering(string? name, double? price, double? price_max, double? price_min, int? categoryId)
     {
-        if (name is not null || keyword is not null)
+        if (name is not null)
         {
-          return Ok(await _productService.GetByNameAsync(name, keyword));
+          return Ok(await _productService.GetByNameAsync(name));
         }
 
         if (price is not null)

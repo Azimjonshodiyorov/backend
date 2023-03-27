@@ -14,9 +14,9 @@ public class CategoryService : CrudService<Category, CategoryDTO>, ICategoryServ
         _repo = repo;
     }
 
-    public async override Task<Category?> GetAsync(int id)
+    public async override Task<Category?> GetByIdAsync(int id)
     {
-        var entity = await _repo.GetAsync(id);
+        var entity = await _repo.GetByIdAsync(id);
         if (entity is null)
         {
             throw ServiceException.NotFound("Category not found");

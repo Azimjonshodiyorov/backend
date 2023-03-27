@@ -27,14 +27,14 @@ public class CrudRepo<TModel,TDto> : ICrudRepo<TModel, TDto>
         return item;
     }
 
-    public virtual async Task<TModel?> GetAsync(int id)
+    public virtual async Task<TModel?> GetByIdAsync(int id)
     {
         return await _dbContext.Set<TModel>().FindAsync(id);
     }
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var item = await GetAsync(id);
+        var item = await GetByIdAsync(id);
         if(item is null)
         {
             return false;
@@ -59,7 +59,7 @@ public class CrudRepo<TModel,TDto> : ICrudRepo<TModel, TDto>
     
     public async Task<TModel?> UpdateAsync(int id, TDto request)
     {
-        var item = await GetAsync(id);
+        var item = await GetByIdAsync(id);
         if(item is null)
         {
             return null;

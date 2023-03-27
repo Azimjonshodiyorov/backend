@@ -31,7 +31,7 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
         return item;
     }
 
-    public override async Task<Order?> GetAsync(int id)
+    public override async Task<Order?> GetByIdAsync(int id)
     {
         return await _dbContext.Orders
             .Include(p => p.ProductLinks)
@@ -40,7 +40,7 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
 
     public async Task<int> AddProductsAsync(int id, ICollection<OrderAddProductsDTO> request)
     {
-        var order = await GetAsync(id);
+        var order = await GetByIdAsync(id);
 
         if (order is null)
         {
@@ -85,7 +85,7 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
 
     public async Task<int> UpdateProductsAsync(int id, ICollection<OrderAddProductsDTO> products)
     {
-        var order = await GetAsync(id);
+        var order = await GetByIdAsync(id);
         if(order is null)
         {
             return -1;

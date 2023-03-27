@@ -1,7 +1,5 @@
 # FullStack for E-Commerce Project
 
-This project contains both Front-end and Back-end.
-
 Tech stack used for Front-end
 - React
 - Redux
@@ -10,13 +8,12 @@ Tech stack used for Front-end
 - SASS
 - HTML
 
-frontend deploy link: https://fs13-frontend-project-1lpu.vercel.app/
-
 Tech stack used for Back-end
 - ASP .NET Core
 - Entity Framework Core
 - PostgreSQL
 
+Unfortunately backend is not connected with the frontend yet. Still working on that part.
 
 ## Setting Up for folder `backend`
 
