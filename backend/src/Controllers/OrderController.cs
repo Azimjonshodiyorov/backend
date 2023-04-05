@@ -33,7 +33,7 @@ public class OrderController : CrudController<Order, OrderDTO>
         return Ok(item);
     }
 
-    [HttpGet("username"), Authorize(Roles = "Admin")]
+    [HttpGet("username"), Authorize(Roles = "Customer")]
     public async Task<IActionResult> GetOrderByUsername()
     {
         var userEmail =  HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub);
