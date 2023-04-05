@@ -18,9 +18,10 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
         _repo = repo;
     }
 
-    public async Task<Order> GetOrderByUsernameAsync(string userName)
+    public async Task<Order> GetOrderByUsernameAsync(string userEmail)
     {
-        var result =  await _repo.GetOrderByUsernameAsync(userName);
+        var result =  await _repo.GetOrderByUsernameAsync(userEmail);
+                Console.WriteLine($"=================in service {userEmail}========");
 
         if(result is null)
         {

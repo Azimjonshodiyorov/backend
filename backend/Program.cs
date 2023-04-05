@@ -19,9 +19,9 @@ internal class Program
 
     builder.WebHost.UseKestrel(options =>
             {
-                options.ListenLocalhost(7655);
+                options.ListenLocalhost(7654);
 
-                options.ListenLocalhost(7656, listenOptions =>
+                options.ListenLocalhost(7657, listenOptions =>
                 {
                     listenOptions.UseHttps();
                 });

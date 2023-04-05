@@ -5,11 +5,15 @@ using NetCoreDemo.DTOs;
 using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
-[Authorize(Roles = "Admin")]
+// [Authorize(Roles = "Admin")]
 public class OrderController : CrudController<Order, OrderDTO>
 {
     private readonly IOrderService _orderService;
+    private readonly UserManager<User> _userManager;
     public OrderController(IOrderService service) : base(service)
     {
           _orderService = service;
@@ -29,11 +33,16 @@ public class OrderController : CrudController<Order, OrderDTO>
         return Ok(item);
     }
 
-    [AllowAnonymous]
-    [HttpGet("username")]
-    public async Task<IActionResult> GetOrderByUsername(string userName)
+    [HttpGet("username"), Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetOrderByUsername()
     {
-        var result = await _orderService.GetOrderByUsernameAsync(userName);
+        var userEmail =  HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub);
+        if(userEmail is null)
+        {
+            return Ok(userEmail);
+        }
+
+        var result = await _orderService.GetOrderByUsernameAsync(userEmail.ToString());
         return Ok(result);
     }
 

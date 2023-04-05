@@ -15,9 +15,10 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
     {
     }
 
-    public async Task<Order> GetOrderByUsernameAsync(string userName)
+    public async Task<Order> GetOrderByUsernameAsync(string userEmail)
     {
-        var query = _dbContext.Orders.Include(p => p.ProductLinks).FirstOrDefault(p => p.OrderName == userName);
+        Console.WriteLine($"=================in repo {userEmail}========");
+        var query = _dbContext.Orders.Include(p => p.ProductLinks).FirstOrDefault(p => p.OrderName == userEmail);
         return query;
     }
 

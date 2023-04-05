@@ -5,6 +5,7 @@ using NetCoreDemo.Models;
 using NetCoreDemo.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 [Authorize(Roles = "Admin")]
 public class UserController : ApiControllerBase
