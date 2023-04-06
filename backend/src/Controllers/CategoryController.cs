@@ -17,7 +17,7 @@ public class CategoryController : CrudController<Category, CategoryDTO>
 
     [AllowAnonymous]
     [HttpGet("{id}/products")]
-    public async Task<IEnumerable<Product>> GetProducts(int id)
+    public async Task<IEnumerable<Product>> GetProductsByCategoryId(int id)
     {
       return await _categoryService.GetProductsByCategoryAsync(id);
     }

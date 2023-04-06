@@ -6,7 +6,6 @@ using NetCoreDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-[Authorize(Roles = "Admin")]
 public class CrudController<TModel, TDto> : ApiControllerBase
     where TModel : BaseModel, new()
     where TDto : BaseDTO<TModel>
@@ -19,7 +18,7 @@ public class CrudController<TModel, TDto> : ApiControllerBase
         _service = service ?? throw new ArgumentNullException(nameof(service));
     }
 
-    [HttpPost]
+    [HttpPost,Authorize(Roles = "Admin")]
     public virtual async Task<IActionResult> Create(TDto request)
     {
         var item = await _service.CreateAsync(request);
@@ -28,18 +27,18 @@ public class CrudController<TModel, TDto> : ApiControllerBase
 
     [AllowAnonymous]
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<TModel?>> Get(int id)
+    public async Task<ActionResult<TModel?>> GetByIdAsync(int id)
     {
         return Ok(await _service.GetByIdAsync(id));
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id}"),Authorize(Roles = "Admin")]
     public async Task<ActionResult<TModel?>> Update(int id, TDto request)
     {
         return Ok(await _service.UpdateAsync(id, request));
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}"),Authorize(Roles = "Admin")]
     public async Task<ActionResult> Delete(int id)
     {
         return Ok(await _service.DeleteAsync(id));

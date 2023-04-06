@@ -22,7 +22,7 @@ public class UserService : IUserService
         _orderService = orderService;
     }
 
-   public async Task<User?> SignUpAsync(UserSignUpDTO request)
+    public async Task<User?> SignUpAsync(UserSignUpDTO request)
     {
         var user = new User
         {

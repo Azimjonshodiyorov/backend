@@ -21,11 +21,10 @@ public class OrderService : CrudService<Order, OrderDTO>, IOrderService
     public async Task<Order> GetOrderByUsernameAsync(string userEmail)
     {
         var result =  await _repo.GetOrderByUsernameAsync(userEmail);
-                Console.WriteLine($"=================in service {userEmail}========");
 
         if(result is null)
         {
-            throw ServiceException.NotFound("Order not found");
+            throw ServiceException.NotFound("You don't have any orders!");
         }
         return result;
     }

@@ -17,7 +17,6 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
 
     public async Task<Order> GetOrderByUsernameAsync(string userEmail)
     {
-        Console.WriteLine($"=================in repo {userEmail}========");
         var query = _dbContext.Orders.Include(p => p.ProductLinks).FirstOrDefault(p => p.OrderName == userEmail);
         return query;
     }

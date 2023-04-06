@@ -119,7 +119,7 @@ internal class Program
         {
             var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
             var config = scope.ServiceProvider.GetService<IConfiguration>();
-                if (dbContext is not null && config.GetValue<bool>("CreateDbAtStart", false))
+            if(dbContext is not null && config.GetValue<bool>("CreateDbAtStart", false))
             {
                 dbContext.Database.EnsureDeleted();
                 dbContext.Database.EnsureCreated();
