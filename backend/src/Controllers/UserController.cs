@@ -42,7 +42,7 @@ public class UserController : ApiControllerBase
     }
 
     [AllowAnonymous]
-    [HttpGet("email")]
+    [HttpGet("{email}")]
     public async Task<IActionResult?> FindByEmail(string email)
     {
         var response = await _service.FindByEmailAsync(email);

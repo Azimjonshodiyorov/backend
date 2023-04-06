@@ -74,14 +74,14 @@ Includes authentication and authorization, marked endpoints are only available f
 - DELETE  api/v1/images/{id} - FOR ADMIN ONLY
 
 4. Order
-- GET  api/v1/orders
-- GET  api/v1/orders?page={pageno}&itemsperpage={itemsperpage}
-- GET  api/v1/orders/{id}
-- POST  api/v1/orders/{id}/add-products
-- DELETE  api/v1/orders/{id}/remove-product
-- PUT  api/v1/orders/{id}/update-product
-- POST api/v1/orders
-- GET  api/v1/orders/username
+- GET  api/v1/orders - FOR ADMIN & LOGIN-USER ONLY
+- GET  api/v1/orders?page={pageno}&itemsperpage={itemsperpage} - FOR ADMIN ONLY
+- GET  api/v1/orders/{id} - FOR ADMIN & LOGIN-USER ONLY
+- POST  api/v1/orders/{id}/add-products - FOR ADMIN & LOGIN-USER ONLY
+- DELETE  api/v1/orders/{id}/remove-product - FOR ADMIN & LOGIN-USER ONLY
+- PUT  api/v1/orders/{id}/update-product - FOR ADMIN & LOGIN-USER ONLY
+- POST api/v1/orders - FOR ADMIN & LOGIN-USER ONLY
+- GET  api/v1/orders/my-orders - FOR ADMIN & LOGIN-USER ONLY    
 - PUT  api/v1/orders/{id} - FOR ADMIN ONLY
 - DELETE  api/v1/orders/{id} - FOR ADMIN ONLY
 
@@ -92,11 +92,11 @@ Includes authentication and authorization, marked endpoints are only available f
 6. User
 - POST api/v1/users/signup
 - POST api/v1/users/signin
-- GET api/v1/users/{userid}
-- GET api/v1/users/email
-- POST api/v1/users/change-password
-- DELETE api/v1/users/delete/{userid}
-- GET api/v1/users/role
+- GET api/v1/users/{userid} - FOR ADMIN & LOGIN-USER ONLY
+- GET api/v1/users/{email} - FOR ADMIN & LOGIN-USER ONLY
+- POST api/v1/users/change-password - FOR LOGIN-USER ONLY
+- DELETE api/v1/users/delete/{userid} - FOR ADMIN & LOGIN-USER ONLY
+- GET api/v1/users/role - FOR ADMIN & LOGIN-USER ONLY
 - GET api/v1/users/all - FOR ADMIN ONLY
 
 
