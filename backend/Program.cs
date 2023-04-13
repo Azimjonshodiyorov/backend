@@ -17,15 +17,15 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-    builder.WebHost.UseKestrel(options =>
-            {
-                options.ListenLocalhost(7654);
+    // builder.WebHost.UseKestrel(options =>
+    //         {
+    //             options.ListenLocalhost(7654);
 
-                options.ListenLocalhost(7657, listenOptions =>
-                {
-                    listenOptions.UseHttps();
-                });
-            });
+    //             options.ListenLocalhost(7657, listenOptions =>
+    //             {
+    //                 listenOptions.UseHttps();
+    //             });
+    //         });
 
     builder.Services.Configure<RouteOptions>(options =>
         {
@@ -110,22 +110,8 @@ internal class Program
 
     app.UseHttpsRedirection();
 
-    if (app.Environment.IsDevelopment())
-    {
         app.UseSwagger();
         app.UseSwaggerUI();
-
-        using (var scope = app.Services.CreateScope())
-        {
-            var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
-            var config = scope.ServiceProvider.GetService<IConfiguration>();
-            if(dbContext is not null && config.GetValue<bool>("CreateDbAtStart", false))
-            {
-                dbContext.Database.EnsureDeleted();
-                dbContext.Database.EnsureCreated();
-            }
-        }
-    }
 
     app.UseMiddleware<ErrorHandlerMiddleware>();
 

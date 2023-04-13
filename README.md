@@ -13,7 +13,14 @@ Tech stack used for Back-end
 - Entity Framework Core
 - PostgreSQL
 
+# Deploy link
+
 Unfortunately backend is not connected with the frontend yet. Still working on that part.
+
+Frontend: https://fs13-frontend-project-1lpu.vercel.app/
+Backend api(swagger): https://ecommerce-backend.azurewebsites.net/swagger/index.html
+eg: of api endpoints: https://ecommerce-backend.azurewebsites.net/api/v1/products
+
 
 ## Setting Up for folder `backend`
 
