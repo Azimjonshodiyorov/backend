@@ -21,6 +21,9 @@ Unfortunately backend is not connected with the frontend yet. Still working on t
 - Backend api(swagger): https://ecommerce-backend.azurewebsites.net/swagger/index.html
 - eg: of api endpoints: https://ecommerce-backend.azurewebsites.net/api/v1/products
 
+# Docker image
+
+- Frontend: https://hub.docker.com/repository/docker/anusiraj/frontend/general
 
 ## Setting Up for folder `backend`
 
