@@ -55,7 +55,7 @@ public class OrderRepo : CrudRepo<Order, OrderDTO>, IOrderRepo
             .Where(p => productIds.Contains(p.Id))
             .ToListAsync();
 
-        foreach (var item in request)
+        foreach(var item in request)
             {
                 order.ProductLinks.Add(new OrderProduct
                 {

@@ -24,14 +24,14 @@ public class OrderController : CrudController<Order, OrderDTO>
         return Ok(await _service.GetAllAsync(page, itemsperpage));
     }
 
-    [HttpPost,Authorize(Roles = "Admin,Customer")]
+    [HttpPost,Authorize(Roles = "Customer")]
     public override async Task<IActionResult> Create(OrderDTO request)
     {
         var item = await _service.CreateAsync(request);
         return Ok(item);
     }   
 
-    [HttpGet("my-orders"),Authorize(Roles = "Admin,Customer")]
+    [HttpGet("my-orders"),Authorize(Roles = "Customer")]
     public async Task<IActionResult> GetOrderByUsername()
     {
         var userEmail = HttpContext.User.Claims.Single(x => x.Type == ClaimTypes.Email).Value;
@@ -39,19 +39,19 @@ public class OrderController : CrudController<Order, OrderDTO>
         return Ok(result);
     }
 
-    [HttpPost("{id}/add-products"),Authorize(Roles = "Admin,Customer")]
+    [HttpPost("{id}/add-products"),Authorize(Roles = "Customer")]
     public async Task<IActionResult> AddProducts(int id, ICollection<OrderAddProductsDTO> request)
     {
         return Ok(await _orderService.AddProductsAsync(id, request));
     }
 
-    [HttpDelete("{id}/remove-product"),Authorize(Roles = "Admin,Customer")]
+    [HttpDelete("{id}/remove-product"),Authorize(Roles = "Customer")]
     public async Task<IActionResult> DeleteProductAsync(int id, int productId)
     {
         return Ok(await _orderService.RemoveProductAsync(id, productId));
     }
 
-    [HttpPut("{id}/update-product"),Authorize(Roles = "Admin,Customer")]
+    [HttpPut("{id}/update-product"),Authorize(Roles = "Customer")]
     public async Task<IActionResult> UpdateProducts(int id, ICollection<OrderAddProductsDTO> request)
     {
         return Ok(await _orderService.UpdateProductsAsync(id, request));
