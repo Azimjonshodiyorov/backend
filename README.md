@@ -19,7 +19,6 @@ Unfortunately backend is not connected with the frontend yet. Still working on t
 
 - Frontend: https://fs13-frontend-project-1lpu.vercel.app/
 - Backend api(swagger): https://ecommerce-backend.azurewebsites.net/swagger/index.html
-- eg: of api endpoints: https://ecommerce-backend.azurewebsites.net/api/v1/products
 
 # Docker image
 

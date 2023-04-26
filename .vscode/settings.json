@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/924d6c8e-fbd7-436a-9734-89f03ef60301/resourceGroups/aspdotnet/providers/Microsoft.Web/sites/ecommerce-backend",
+    "appService.deploySubpath": "backend/bin/Publish"
+}
