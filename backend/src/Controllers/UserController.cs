@@ -42,9 +42,10 @@ public class UserController : ApiControllerBase
     }
 
     [HttpPost("change-password"),Authorize(Roles = "Customer")]    
-    public async Task<IActionResult> ChangePassword(string email, string currentPassword, string newPassword)
+    public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword)
     {
-        var response = await _service.ChangePasswordAsync(email, currentPassword, newPassword);
+        var userEmail = HttpContext.User.Claims.Single(x => x.Type == ClaimTypes.Email).Value;
+        var response = await _service.ChangePasswordAsync(userEmail, currentPassword, newPassword);
         return Ok(response);
     }
 

@@ -5,6 +5,7 @@ using NetCoreDemo.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NetCoreDemo.Helpers;
+using System.Runtime.CompilerServices;
 
 public class UserService : IUserService
 {
@@ -81,7 +82,7 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<User> ChangePasswordAsync(string email, string currentPassword, string newPassword)
+    public async Task<IdentityResult> ChangePasswordAsync(string email, string currentPassword, string newPassword)
     {
         var user = await FindByEmailAsync(email);
         if(user is null)
@@ -92,13 +93,14 @@ public class UserService : IUserService
         {
             throw ServiceException.Unauthorized("Wrong Password");
         }
+        
         var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 
-        if(result is not null)
-        {
-            throw ServiceException.BadRequest("Password cannot change");
-        }
-        return user;
+        // if(result is null)
+        // {
+        //     throw ServiceException.BadRequest("Password cannot change");
+        // }
+        return result; 
     }
 
     public async Task<bool> DeleteAsync(string userEmail)
