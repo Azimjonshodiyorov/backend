@@ -101,11 +101,11 @@ Includes authentication and authorization, marked endpoints are only available f
 6. User
 - POST api/v1/users/signup
 - POST api/v1/users/signin
-- GET api/v1/users/{userid} - FOR ADMIN & LOGIN-USER ONLY
-- GET api/v1/users/{email} - FOR ADMIN & LOGIN-USER ONLY
+- GET api/v1/users/myinfo - FOR LOGIN-USER ONLY
 - POST api/v1/users/change-password - FOR LOGIN-USER ONLY
-- DELETE api/v1/users/delete/{userid} - FOR ADMIN & LOGIN-USER ONLY
-- GET api/v1/users/role - FOR ADMIN & LOGIN-USER ONLY
+- DELETE api/v1/users/delete-byadmin/{userid} - FOR ADMIN ONLY
+- DELETE api/v1/users/delete-myaccount- FOR LOGIN-USER ONLY
+- GET api/v1/users/role/{userId} - FOR ADMIN ONLY
 - GET api/v1/users/all - FOR ADMIN ONLY
 
 
