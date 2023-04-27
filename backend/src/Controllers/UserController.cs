@@ -56,15 +56,22 @@ public class UserController : ApiControllerBase
         return Ok(response);
     }
 
-    [AllowAnonymous]
-    [HttpGet("role/{userId}")]    
+    [HttpDelete("delete-myaccount"),Authorize(Roles = "Customer")]    
+    public async Task<IActionResult> DeleteUser()
+    {
+        var userEmail = HttpContext.User.Claims.Single(x => x.Type == ClaimTypes.Email).Value;
+        var response = await _service.DeleteAsync(userEmail);
+        return Ok(response);
+    }
+
+    [HttpGet("role/{userId}"),Authorize(Roles = "Admin")]    
     public async Task<IActionResult> GetRole(string userId)
     {
         var response = await _service.GetRolesAsync(userId);
         return Ok(response);
     }
 
-    [HttpGet("all")]    
+    [HttpGet("all"),Authorize(Roles = "Admin")]    
     public async Task<IActionResult> GetAll()
     {
         var response = await _service.GetAllAsync();

@@ -17,15 +17,15 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-    // builder.WebHost.UseKestrel(options =>
-    //         {
-    //             options.ListenLocalhost(7654);
+    builder.WebHost.UseKestrel(options =>
+            {
+                options.ListenLocalhost(7654);
 
-    //             options.ListenLocalhost(7657, listenOptions =>
-    //             {
-    //                 listenOptions.UseHttps();
-    //             });
-    //         });
+                options.ListenLocalhost(7657, listenOptions =>
+                {
+                    listenOptions.UseHttps();
+                });
+            });
 
     builder.Services.Configure<RouteOptions>(options =>
         {
@@ -109,9 +109,9 @@ internal class Program
     var app = builder.Build();
 
     app.UseHttpsRedirection();
-
-        app.UseSwagger();
-        app.UseSwaggerUI();
+    
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
     app.UseMiddleware<ErrorHandlerMiddleware>();
 

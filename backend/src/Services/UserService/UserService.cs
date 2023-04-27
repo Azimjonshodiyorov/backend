@@ -95,11 +95,6 @@ public class UserService : IUserService
         }
         
         var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
-
-        // if(result is null)
-        // {
-        //     throw ServiceException.BadRequest("Password cannot change");
-        // }
         return result; 
     }
 
@@ -120,7 +115,7 @@ public class UserService : IUserService
 
     public async Task<ICollection<string>> GetRolesAsync(string userId)
     {
-        var foundUser = await FindByEmailAsync(userId);
+        var foundUser = await _userManager.FindByIdAsync(userId);
         if(foundUser is null)
         {
             throw ServiceException.NotFound("User not found");
