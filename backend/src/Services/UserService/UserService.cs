@@ -71,22 +71,12 @@ public class UserService : IUserService
         return await _tokenService.GenerateTokenAsync(user);
     }
 
-    public async Task<User?> FindByIdAsync(string userId)
+    public async Task<User?> FindByEmailAsync(string userEmail)
     {
-        var user = await _userManager.FindByIdAsync(userId);
+        var user = await _userManager.FindByEmailAsync(userEmail);
         if(user is null)
         {
-            throw ServiceException.NotFound("User not found");
-        }
-        return user;
-    }
-
-    public async Task<User?> FindByEmailAsync(string email)
-    {
-        var user = await _userManager.FindByEmailAsync(email);
-        if(user is null)
-        {
-            throw ServiceException.NotFound("User not found");
+            throw ServiceException.NotFound("Something went wrong!");
         }
         return user;
     }
@@ -104,19 +94,19 @@ public class UserService : IUserService
         }
         var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
 
-        if(result is null)
+        if(result is not null)
         {
             throw ServiceException.BadRequest("Password cannot change");
         }
         return user;
     }
 
-    public async Task<bool> DeleteAsync(string userId)
+    public async Task<bool> DeleteAsync(string userEmail)
     {
-        var foundUser = await FindByIdAsync(userId);
+        var foundUser = await FindByEmailAsync(userEmail);
         if(foundUser is null)
         {
-            throw ServiceException.Unauthorized("Wrong Password");
+            throw ServiceException.Unauthorized("Wrong Email, User not found!");
         }
         var deleteUser = await _userManager.DeleteAsync(foundUser);
         if(deleteUser is null)
@@ -124,12 +114,11 @@ public class UserService : IUserService
             return false;
         }
         return true;
-
     }
 
     public async Task<ICollection<string>> GetRolesAsync(string userId)
     {
-        var foundUser = await FindByIdAsync(userId);
+        var foundUser = await FindByEmailAsync(userId);
         if(foundUser is null)
         {
             throw ServiceException.NotFound("User not found");

@@ -6,8 +6,8 @@ using NetCoreDemo.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
-[Authorize(Roles = "Admin")]
 public class UserController : ApiControllerBase
 {
     private readonly IUserService _service;
@@ -33,40 +33,30 @@ public class UserController : ApiControllerBase
         return Ok(response);
     }
 
-    [AllowAnonymous]
-    [HttpGet("{userId}")]
-    public async Task<IActionResult?> FindById(string userId)
+    [HttpGet("myinfo"),Authorize(Roles = "Customer")]
+    public async Task<IActionResult?> FindById()
     {
-        var response = await _service.FindByIdAsync(userId);
+        var userEmail = HttpContext.User.Claims.Single(x => x.Type == ClaimTypes.Email).Value;
+        var response = await _service.FindByEmailAsync(userEmail);
         return Ok(UserSignUpResponseDTO.FromUser((User)response));
     }
 
-    [AllowAnonymous]
-    [HttpGet("{email}")]
-    public async Task<IActionResult?> FindByEmail(string email)
-    {
-        var response = await _service.FindByEmailAsync(email);
-        return Ok(UserSignUpResponseDTO.FromUser((User)response));
-    }
-
-    [AllowAnonymous]
-    [HttpPost("change-password")]    
+    [HttpPost("change-password"),Authorize(Roles = "Customer")]    
     public async Task<IActionResult> ChangePassword(string email, string currentPassword, string newPassword)
     {
         var response = await _service.ChangePasswordAsync(email, currentPassword, newPassword);
         return Ok(response);
     }
 
-    [AllowAnonymous]
-    [HttpDelete("delete/{userId}")]    
-    public async Task<IActionResult> DeleteUser(string userId)
+    [HttpDelete("delete-byadmin/{userEmail}"),Authorize(Roles = "Admin")]    
+    public async Task<IActionResult> DeleteUser(string userEmail)
     {
-        var response = await _service.DeleteAsync(userId);
+        var response = await _service.DeleteAsync(userEmail);
         return Ok(response);
     }
 
     [AllowAnonymous]
-    [HttpGet("role")]    
+    [HttpGet("role/{userId}")]    
     public async Task<IActionResult> GetRole(string userId)
     {
         var response = await _service.GetRolesAsync(userId);

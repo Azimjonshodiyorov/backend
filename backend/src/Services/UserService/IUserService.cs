@@ -7,10 +7,9 @@ public interface IUserService
 {
     Task<User?> SignUpAsync(UserSignUpDTO request);
     Task<UserSignInResponseDTO?> SignInAsync(UserSignInDTO request);
-    Task<User?> FindByIdAsync(string userId);
-    Task<User?> FindByEmailAsync(string email);
+    Task<User?> FindByEmailAsync(string userEmail);
     Task<User> ChangePasswordAsync(string email, string currentPassword, string newPassword);
-    Task<bool> DeleteAsync(string userId);
+    Task<bool> DeleteAsync(string userEmail);
     Task<ICollection<string>> GetRolesAsync(string userId);
     Task<ICollection<User>> GetAllAsync();
 }
